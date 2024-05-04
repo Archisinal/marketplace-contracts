@@ -151,11 +151,6 @@ mod arch_nft {
 
             instance
         }
-
-        #[ink(message)]
-        pub fn account_id(&self) -> AccountId {
-            Self::env().account_id()
-        }
     }
 
     #[default_impl(PSP34Mintable)]
