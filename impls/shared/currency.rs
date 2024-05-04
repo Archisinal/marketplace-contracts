@@ -85,7 +85,7 @@ impl Currency {
     pub fn transfer(&mut self, to: AccountId, amount: u128) -> ProjectResult<()> {
         match self {
             Currency::Native => Self::env()
-                .transfer(Self::env().caller(), amount)
+                .transfer(to, amount)
                 .map_err(|_| ArchisinalError::TransferNativeError),
             Currency::Custom(address) => {
                 PSP22Ref::transfer(address, to, amount, vec![]).map_err(ArchisinalError::PSP22)
