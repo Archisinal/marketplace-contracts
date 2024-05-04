@@ -48,8 +48,9 @@ pub trait MarketplaceImpl:
         currency: Currency,
     ) -> ProjectResult<u128> {
         let contract_address: AccountId = <Self as DefaultEnv>::env().account_id();
+        let caller = <Self as DefaultEnv>::env().caller();
 
-        if PSP34Ref::owner_of(&collection, token_id.clone()) != Some(creator) {
+        if PSP34Ref::owner_of(&collection, token_id.clone()) != Some(creator) || creator != caller {
             return Err(ArchisinalError::CallerIsNotNFTOwner);
         }
 
