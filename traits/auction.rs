@@ -154,7 +154,6 @@ pub trait Auction {
     /// # Errors
     ///
     /// * `ArchisinalError::AuctionNotFound` - The auction was not found
-    /// * `ArchisinalError::CallerIsAuctionOwner` - The caller is the creator of the auction
     /// * `ArchisinalError::AuctionNotInAuction` - The auction is not in the auction state, so it cannot be bid on
     /// * `ArchisinalError::BidPriceTooLow` - The bid amount is too low
     /// * `ArchisinalError::AuctionNotStarted` - The bid amount is too high

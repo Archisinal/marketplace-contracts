@@ -59,7 +59,6 @@ pub trait Marketplace {
     ///
     /// # Errors
     ///
-    /// * `ArchisinalError::CreatorIsNotCaller` - If the creator is not the caller
     /// * `ArchisinalError::CallerIsNotNFTOwner` - If the caller is not the owner of the NFT
     /// * `ArchisinalError::PSP34Error(...)` - If the PSP34 contract returns an error
     /// * `ArchisinalError::IntegerOverflow` - If an integer overflow occurs
