@@ -286,6 +286,13 @@ pub trait AuctionImpl:
                 },
             );
 
+            PSP34Ref::transfer(
+                &auction.collection,
+                auction.creator,
+                auction.token_id.clone(),
+                vec![],
+            )?;
+
             self.emit_auction_ended(caller, auction_id);
             self.emit_no_bids(caller, auction_id);
 
