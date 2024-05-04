@@ -157,11 +157,10 @@ pub trait MarketplaceImpl:
 
         currency.transfer_from(caller, listing.creator, price_without_fee)?;
 
-        let collection_owner = OwnableRef::owner(&listing.collection);
+        let collection_owner = OwnableRef::owner(&listing.collection)
+            .unwrap_or(listing.creator);
 
-        if let Some(collection_owner) = collection_owner {
-            currency.transfer_from(caller, collection_owner, fee)?;
-        }
+        currency.transfer_from(caller, collection_owner, fee)?;
 
         self.data::<Data>().listings.insert(
             &listing_id,

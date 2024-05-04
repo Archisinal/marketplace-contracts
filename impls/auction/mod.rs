@@ -311,7 +311,7 @@ pub trait AuctionImpl:
         currency.transfer(auction.creator, without_fee)?;
 
         let collection_owner = OwnableRef::owner(&auction.collection)
-            .ok_or(ArchisinalError::CollectionOwnerNotFound)?;
+            .unwrap_or(auction.creator);
 
         currency.transfer(collection_owner, fee)?;
 
