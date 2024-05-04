@@ -22,6 +22,7 @@ pub enum ArchisinalError {
     NoOwner,
     AdminAccessError,
     AuctionMinBidStepIsZero,
+    ListingPriceIsZero,
     CodehashIsBanned,
     AuctionStartTimeIsBeforeNow,
     AccountAlreadyExists,

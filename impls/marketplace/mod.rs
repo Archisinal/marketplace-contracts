@@ -54,6 +54,10 @@ pub trait MarketplaceImpl:
             return Err(ArchisinalError::CallerIsNotNFTOwner);
         }
 
+        if price == 0 {
+            return Err(ArchisinalError::ListingPriceIsZero);
+        }
+
         self.check_collection(collection)?;
 
         PSP34Ref::transfer(&collection, contract_address, token_id.clone(), vec![])?;
