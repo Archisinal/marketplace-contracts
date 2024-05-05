@@ -158,8 +158,7 @@ pub trait MarketplaceImpl:
 
         currency.transfer_from(caller, listing.creator, price_without_fee)?;
 
-        let collection_owner = OwnableRef::owner(&listing.collection)
-            .unwrap_or(listing.creator);
+        let collection_owner = OwnableRef::owner(&listing.collection).unwrap_or(listing.creator);
 
         currency.transfer_from(caller, collection_owner, fee)?;
 
@@ -176,42 +175,50 @@ pub trait MarketplaceImpl:
         Ok(())
     }
 
-    fn buy_batch(&mut self, ids: Vec<u128>) -> ProjectResult<()> {
+    fn buy_batch(&mut self, mut ids: Vec<u128>) -> ProjectResult<()> {
         let caller = <Self as DefaultEnv>::env().caller();
 
-        let mut listings = ids.into_iter().try_fold(Vec::new(), |mut acc, id| {
-            let listing = self
-                .data::<Data>()
-                .listings
-                .get(&id)
-                .ok_or(ArchisinalError::ListingNotFound)?;
-
-            if listing.status != ListingStatus::OnSale {
-                return Err(ArchisinalError::ListingNotOnSale);
+        ids.sort();
+        let mut new_ids = Vec::new();
+        for id in ids {
+            if let Some(last) = new_ids.last() {
+                if *last != id {
+                    new_ids.push(id);
+                }
+            } else {
+                new_ids.push(id);
             }
+        }
+        let ids = new_ids;
 
-            if caller == listing.creator {
-                return Err(ArchisinalError::CallerIsListingOwner);
-            }
+        let (mut listings, total_price_native) = ids.into_iter().try_fold(
+            (Vec::new(), 0),
+            |(mut acc_listings, mut acc_total_price_native), id| {
+                let listing = self
+                    .data::<Data>()
+                    .listings
+                    .get(&id)
+                    .ok_or(ArchisinalError::ListingNotFound)?;
 
-            acc.push(listing);
+                if listing.status != ListingStatus::OnSale {
+                    return Err(ArchisinalError::ListingNotOnSale);
+                }
 
-            Ok(acc)
-        })?;
+                if caller == listing.creator {
+                    return Err(ArchisinalError::CallerIsListingOwner);
+                }
 
-        let total_price_native =
-            listings
-                .clone()
-                .into_iter()
-                .try_fold(0u128, |mut acc, listing| {
-                    acc += if listing.currency.is_native() {
-                        listing.price
-                    } else {
-                        0
-                    };
+                acc_total_price_native += if listing.currency.is_native() {
+                    listing.price
+                } else {
+                    0
+                };
 
-                    Ok::<u128, ArchisinalError>(acc)
-                })?;
+                acc_listings.push(listing);
+
+                Ok((acc_listings, acc_total_price_native))
+            },
+        )?;
 
         if Self::env().transferred_value() < total_price_native {
             return Err(ArchisinalError::InsufficientFunds);
