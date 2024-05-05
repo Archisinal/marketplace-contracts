@@ -149,9 +149,6 @@ pub trait MarketplaceImpl:
             .checked_sub(price_without_fee)
             .ok_or(ArchisinalError::IntegerUnderflow)?;
 
-        // Check if the caller has enough balance to buy the NFT (in case of Native)
-        currency.assure_transfer(price)?;
-
         PSP34Ref::transfer(
             &listing.collection,
             caller,

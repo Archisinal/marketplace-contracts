@@ -208,10 +208,6 @@ pub trait AuctionImpl:
             return Err(ArchisinalError::AuctionNotInAuction);
         }
 
-        if auction.start_time > self.timestamp() {
-            return Err(ArchisinalError::AuctionNotStarted);
-        }
-
         if auction.end_time < self.timestamp() {
             return Err(ArchisinalError::AuctionEnded);
         }
