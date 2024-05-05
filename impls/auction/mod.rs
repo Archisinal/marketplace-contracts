@@ -53,10 +53,11 @@ pub trait AuctionImpl:
         }: AuctionInfo,
     ) -> ProjectResult<u128> {
         let contract_address: AccountId = <Self as DefaultEnv>::env().account_id();
+        let caller = <Self as DefaultEnv>::env().caller();
 
         self.check_collection(collection)?;
 
-        if PSP34Ref::owner_of(&collection, token_id.clone()) != Some(creator) {
+        if PSP34Ref::owner_of(&collection, token_id.clone()) != Some(creator) || creator != caller {
             return Err(ArchisinalError::CallerIsNotNFTOwner);
         }
 
@@ -207,10 +208,6 @@ pub trait AuctionImpl:
             return Err(ArchisinalError::AuctionNotInAuction);
         }
 
-        if auction.start_time > self.timestamp() {
-            return Err(ArchisinalError::AuctionNotStarted);
-        }
-
         if auction.end_time < self.timestamp() {
             return Err(ArchisinalError::AuctionEnded);
         }
@@ -278,6 +275,16 @@ pub trait AuctionImpl:
         } else {
             let caller = <Self as DefaultEnv>::env().caller();
 
+            PSP34Ref::transfer(
+                &auction.collection,
+                auction.creator.clone(),
+                auction.token_id.clone(),
+                vec![],
+            )?;
+
+            self.emit_auction_ended(caller, auction_id);
+            self.emit_no_bids(caller, auction_id);
+
             self.data::<Data>().auctions.insert(
                 &auction_id,
                 &Auction {
@@ -285,9 +292,6 @@ pub trait AuctionImpl:
                     ..auction
                 },
             );
-
-            self.emit_auction_ended(caller, auction_id);
-            self.emit_no_bids(caller, auction_id);
 
             return Ok(());
         }
@@ -303,7 +307,7 @@ pub trait AuctionImpl:
         currency.transfer(auction.creator, without_fee)?;
 
         let collection_owner = OwnableRef::owner(&auction.collection)
-            .ok_or(ArchisinalError::CollectionOwnerNotFound)?;
+            .unwrap_or(auction.creator);
 
         currency.transfer(collection_owner, fee)?;
 

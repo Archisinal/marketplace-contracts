@@ -85,7 +85,7 @@ impl Currency {
     pub fn transfer(&mut self, to: AccountId, amount: u128) -> ProjectResult<()> {
         match self {
             Currency::Native => Self::env()
-                .transfer(Self::env().caller(), amount)
+                .transfer(to, amount)
                 .map_err(|_| ArchisinalError::TransferNativeError),
             Currency::Custom(address) => {
                 PSP22Ref::transfer(address, to, amount, vec![]).map_err(ArchisinalError::PSP22)
@@ -126,8 +126,12 @@ impl Currency {
     pub fn assure_transfer(&self, amount: u128) -> ProjectResult<()> {
         match self {
             Currency::Native => {
-                if Self::env().transferred_value() >= amount {
+                if Self::env().transferred_value() == amount {
                     Ok(())
+                } else if Self::env().transferred_value() > amount {
+                    let refund_amount = Self::env().transferred_value() - amount;
+                    Self::env().transfer(Self::env().caller(), refund_amount)
+                        .map_err(|_| ArchisinalError::TransferNativeError)
                 } else {
                     Err(ArchisinalError::TransferNativeError)
                 }
