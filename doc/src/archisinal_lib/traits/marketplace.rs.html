@@ -197,7 +197,7 @@
     </span><span class="attr">#[ink(message)]
     </span><span class="kw">fn </span>get_listing_by_index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: u128) -&gt; <span class="prelude-ty">Option</span>&lt;Listing&gt;;
 
-    <span class="doccomment">/// List an NFT for sale
+    <span class="doccomment">/// List a NFT for sale
     ///
     /// # Note
     /// This function will transfer the NFT from the caller to the Marketplace contract.
@@ -235,7 +235,7 @@
         currency: Currency,
     ) -&gt; ProjectResult&lt;u128&gt;;
 
-    <span class="doccomment">/// List an NFT for auction
+    <span class="doccomment">/// List a NFT for auction
     ///
     /// # Note
     /// This function will transfer the NFT from the Marketplace contract to creator back.
@@ -262,7 +262,7 @@
     </span><span class="attr">#[ink(message)]
     </span><span class="kw">fn </span>cancel_listing(<span class="kw-2">&amp;mut </span><span class="self">self</span>, listing_id: u128) -&gt; ProjectResult&lt;()&gt;;
 
-    <span class="doccomment">/// Buy an NFT
+    <span class="doccomment">/// Buy a NFT
     ///
     /// # Note
     /// This function will transfer the NFT from the Marketplace contract to the buyer.

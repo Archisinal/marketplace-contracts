@@ -61,20 +61,23 @@ export class IdBuilder {
 	}
 }
 
+export enum OwnableError {
+	callerIsNotOwner = 'CallerIsNotOwner',
+	newOwnerIsZero = 'NewOwnerIsZero'
+}
+
 export interface ArchisinalError {
 	noOwner ? : null,
 	adminAccessError ? : null,
 	auctionMinBidStepIsZero ? : null,
-	creatorIsNotCaller ? : null,
+	listingPriceIsZero ? : null,
 	codehashIsBanned ? : null,
 	auctionStartTimeIsBeforeNow ? : null,
-	callerIsAuctionOwner ? : null,
 	accountAlreadyExists ? : null,
 	insufficientFunds ? : null,
 	auctionPriceIsZero ? : null,
 	auctionEndTimeIsBeforeStartTime ? : null,
 	collectionOwnerNotFound ? : null,
-	auctionHasNoBids ? : null,
 	auctionNotEnded ? : null,
 	bidPriceTooLow ? : null,
 	auctionEnded ? : null,
@@ -117,9 +120,9 @@ export class ArchisinalErrorBuilder {
 			auctionMinBidStepIsZero: null,
 		};
 	}
-	static CreatorIsNotCaller(): ArchisinalError {
+	static ListingPriceIsZero(): ArchisinalError {
 		return {
-			creatorIsNotCaller: null,
+			listingPriceIsZero: null,
 		};
 	}
 	static CodehashIsBanned(): ArchisinalError {
@@ -130,11 +133,6 @@ export class ArchisinalErrorBuilder {
 	static AuctionStartTimeIsBeforeNow(): ArchisinalError {
 		return {
 			auctionStartTimeIsBeforeNow: null,
-		};
-	}
-	static CallerIsAuctionOwner(): ArchisinalError {
-		return {
-			callerIsAuctionOwner: null,
 		};
 	}
 	static AccountAlreadyExists(): ArchisinalError {
@@ -160,11 +158,6 @@ export class ArchisinalErrorBuilder {
 	static CollectionOwnerNotFound(): ArchisinalError {
 		return {
 			collectionOwnerNotFound: null,
-		};
-	}
-	static AuctionHasNoBids(): ArchisinalError {
-		return {
-			auctionHasNoBids: null,
 		};
 	}
 	static AuctionNotEnded(): ArchisinalError {
@@ -287,11 +280,6 @@ export class ArchisinalErrorBuilder {
 			other: value,
 		};
 	}
-}
-
-export enum OwnableError {
-	callerIsNotOwner = 'CallerIsNotOwner',
-	newOwnerIsZero = 'NewOwnerIsZero'
 }
 
 export enum AccessControlError {

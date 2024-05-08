@@ -227,6 +227,7 @@ pub trait AuctionImpl:
 
         let mut currency = auction.currency.clone();
 
+        currency.assure_transfer(price)?;
         currency.transfer_from(caller, contract_address, price)?;
 
         if let Some(bidder) = current_bidder {

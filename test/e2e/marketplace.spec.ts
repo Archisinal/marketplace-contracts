@@ -8,22 +8,12 @@ import { ListingStatus } from '../../typechain-generated/types-returns/marketpla
 import ApiSingleton from '../shared/api_singleton'
 import { expect } from '../shared/chai'
 import { E2E_PREFIX, PRICE, PRICE_WITH_FEE, TOKEN_ID, TOKEN_ID_2 } from '../shared/consts'
-import { mintAndList } from '../shared/marketplace'
+import { getBalance, mintAndList } from '../shared/marketplace'
 import { Signers } from '../shared/signers'
 import { setupArchNFT } from '../shared/test-setups/arch_nft'
 import {COLLECTION_ROYALTY} from "../shared/test-setups/creator";
 import { setupMarketplace as setup } from '../shared/test-setups/marketplace'
 import { INITIAL_BALANCE, setupPSP22 } from '../shared/test-setups/my_psp22'
-
-async function getBalance(signer: KeyringPair) {
-  const api = await ApiSingleton.getInstance()
-
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  const { data: balance } = await api.query.system.account(signer.address)
-
-  return balance.free
-}
 
 describe(E2E_PREFIX + 'Marketplace', () => {
   it('Upon initialization, the listing count should be zero.', async () => {
@@ -91,7 +81,7 @@ describe(E2E_PREFIX + 'Marketplace', () => {
       })
     })
 
-    it('Buy an NFT from a listing.', async () => {
+    it('Buy a NFT from a listing.', async () => {
       const contract = await setup()
       const nft = await setupArchNFT()
       const psp22 = await setupPSP22()
@@ -238,7 +228,7 @@ describe(E2E_PREFIX + 'Marketplace', () => {
       })
     })
 
-    it('Buy an NFT from a listing.', async () => {
+    it('Buy a NFT from a listing.', async () => {
       const contract = await setup()
       const nft = await setupArchNFT()
       const psp22 = await setupPSP22()

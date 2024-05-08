@@ -182,8 +182,6 @@ impl Currency {
     ) -> ProjectResult<()> {
         match self {
             Currency::Native => {
-                self.assure_transfer(amount)?;
-
                 Self::env()
                     .transfer(to, amount)
                     .map_err(|_| ArchisinalError::TransferNativeError)

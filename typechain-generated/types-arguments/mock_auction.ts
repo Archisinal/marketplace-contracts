@@ -10,16 +10,14 @@ export interface ArchisinalError {
 	noOwner ? : null,
 	adminAccessError ? : null,
 	auctionMinBidStepIsZero ? : null,
-	creatorIsNotCaller ? : null,
+	listingPriceIsZero ? : null,
 	codehashIsBanned ? : null,
 	auctionStartTimeIsBeforeNow ? : null,
-	callerIsAuctionOwner ? : null,
 	accountAlreadyExists ? : null,
 	insufficientFunds ? : null,
 	auctionPriceIsZero ? : null,
 	auctionEndTimeIsBeforeStartTime ? : null,
 	collectionOwnerNotFound ? : null,
-	auctionHasNoBids ? : null,
 	auctionNotEnded ? : null,
 	bidPriceTooLow ? : null,
 	auctionEnded ? : null,
@@ -62,9 +60,9 @@ export class ArchisinalErrorBuilder {
 			auctionMinBidStepIsZero: null,
 		};
 	}
-	static CreatorIsNotCaller(): ArchisinalError {
+	static ListingPriceIsZero(): ArchisinalError {
 		return {
-			creatorIsNotCaller: null,
+			listingPriceIsZero: null,
 		};
 	}
 	static CodehashIsBanned(): ArchisinalError {
@@ -75,11 +73,6 @@ export class ArchisinalErrorBuilder {
 	static AuctionStartTimeIsBeforeNow(): ArchisinalError {
 		return {
 			auctionStartTimeIsBeforeNow: null,
-		};
-	}
-	static CallerIsAuctionOwner(): ArchisinalError {
-		return {
-			callerIsAuctionOwner: null,
 		};
 	}
 	static AccountAlreadyExists(): ArchisinalError {
@@ -105,11 +98,6 @@ export class ArchisinalErrorBuilder {
 	static CollectionOwnerNotFound(): ArchisinalError {
 		return {
 			collectionOwnerNotFound: null,
-		};
-	}
-	static AuctionHasNoBids(): ArchisinalError {
-		return {
-			auctionHasNoBids: null,
 		};
 	}
 	static AuctionNotEnded(): ArchisinalError {
@@ -406,6 +394,17 @@ export enum ListingStatus {
 	cancelled = 'Cancelled'
 }
 
+export type AuctionInfo = {
+	creator: AccountId,
+	collection: AccountId,
+	tokenId: Id,
+	startPrice: (string | number | BN),
+	minBidStep: (string | number | BN),
+	currency: Currency,
+	startTime: (number | string | BN),
+	endTime: (number | string | BN)
+}
+
 export type Auction = {
 	id: (string | number | BN),
 	creator: AccountId,
@@ -428,17 +427,6 @@ export enum AuctionStatus {
 	waitingForClaim = 'WaitingForClaim',
 	ended = 'Ended',
 	cancelled = 'Cancelled'
-}
-
-export type AuctionInfo = {
-	creator: AccountId,
-	collection: AccountId,
-	tokenId: Id,
-	startPrice: (string | number | BN),
-	minBidStep: (string | number | BN),
-	currency: Currency,
-	startTime: (number | string | BN),
-	endTime: (number | string | BN)
 }
 
 export type Hash = string | number[]

@@ -7,20 +7,95 @@ export enum LangError {
 	couldNotReadInput = 'CouldNotReadInput'
 }
 
+export type Listing = {
+	id: ReturnNumber,
+	creator: AccountId,
+	collection: AccountId,
+	tokenId: Id,
+	price: ReturnNumber,
+	currency: Currency,
+	status: ListingStatus,
+	royalty: number
+}
+
+export interface Id {
+	u8 ? : number,
+	u16 ? : number,
+	u32 ? : number,
+	u64 ? : number,
+	u128 ? : ReturnNumber,
+	bytes ? : Array<number>
+}
+
+export class IdBuilder {
+	static U8(value: number): Id {
+		return {
+			u8: value,
+		};
+	}
+	static U16(value: number): Id {
+		return {
+			u16: value,
+		};
+	}
+	static U32(value: number): Id {
+		return {
+			u32: value,
+		};
+	}
+	static U64(value: number): Id {
+		return {
+			u64: value,
+		};
+	}
+	static U128(value: ReturnNumber): Id {
+		return {
+			u128: value,
+		};
+	}
+	static Bytes(value: Array<number>): Id {
+		return {
+			bytes: value,
+		};
+	}
+}
+
+export interface Currency {
+	native ? : null,
+	custom ? : AccountId
+}
+
+export class CurrencyBuilder {
+	static Native(): Currency {
+		return {
+			native: null,
+		};
+	}
+	static Custom(value: AccountId): Currency {
+		return {
+			custom: value,
+		};
+	}
+}
+
+export enum ListingStatus {
+	onSale = 'OnSale',
+	sold = 'Sold',
+	cancelled = 'Cancelled'
+}
+
 export interface ArchisinalError {
 	noOwner ? : null,
 	adminAccessError ? : null,
 	auctionMinBidStepIsZero ? : null,
-	creatorIsNotCaller ? : null,
+	listingPriceIsZero ? : null,
 	codehashIsBanned ? : null,
 	auctionStartTimeIsBeforeNow ? : null,
-	callerIsAuctionOwner ? : null,
 	accountAlreadyExists ? : null,
 	insufficientFunds ? : null,
 	auctionPriceIsZero ? : null,
 	auctionEndTimeIsBeforeStartTime ? : null,
 	collectionOwnerNotFound ? : null,
-	auctionHasNoBids ? : null,
 	auctionNotEnded ? : null,
 	bidPriceTooLow ? : null,
 	auctionEnded ? : null,
@@ -63,9 +138,9 @@ export class ArchisinalErrorBuilder {
 			auctionMinBidStepIsZero: null,
 		};
 	}
-	static CreatorIsNotCaller(): ArchisinalError {
+	static ListingPriceIsZero(): ArchisinalError {
 		return {
-			creatorIsNotCaller: null,
+			listingPriceIsZero: null,
 		};
 	}
 	static CodehashIsBanned(): ArchisinalError {
@@ -76,11 +151,6 @@ export class ArchisinalErrorBuilder {
 	static AuctionStartTimeIsBeforeNow(): ArchisinalError {
 		return {
 			auctionStartTimeIsBeforeNow: null,
-		};
-	}
-	static CallerIsAuctionOwner(): ArchisinalError {
-		return {
-			callerIsAuctionOwner: null,
 		};
 	}
 	static AccountAlreadyExists(): ArchisinalError {
@@ -106,11 +176,6 @@ export class ArchisinalErrorBuilder {
 	static CollectionOwnerNotFound(): ArchisinalError {
 		return {
 			collectionOwnerNotFound: null,
-		};
-	}
-	static AuctionHasNoBids(): ArchisinalError {
-		return {
-			auctionHasNoBids: null,
 		};
 	}
 	static AuctionNotEnded(): ArchisinalError {
@@ -328,83 +393,6 @@ export class PSP22ErrorBuilder {
 			safeTransferCheckFailed: value,
 		};
 	}
-}
-
-export type Listing = {
-	id: ReturnNumber,
-	creator: AccountId,
-	collection: AccountId,
-	tokenId: Id,
-	price: ReturnNumber,
-	currency: Currency,
-	status: ListingStatus,
-	royalty: number
-}
-
-export interface Id {
-	u8 ? : number,
-	u16 ? : number,
-	u32 ? : number,
-	u64 ? : number,
-	u128 ? : ReturnNumber,
-	bytes ? : Array<number>
-}
-
-export class IdBuilder {
-	static U8(value: number): Id {
-		return {
-			u8: value,
-		};
-	}
-	static U16(value: number): Id {
-		return {
-			u16: value,
-		};
-	}
-	static U32(value: number): Id {
-		return {
-			u32: value,
-		};
-	}
-	static U64(value: number): Id {
-		return {
-			u64: value,
-		};
-	}
-	static U128(value: ReturnNumber): Id {
-		return {
-			u128: value,
-		};
-	}
-	static Bytes(value: Array<number>): Id {
-		return {
-			bytes: value,
-		};
-	}
-}
-
-export interface Currency {
-	native ? : null,
-	custom ? : AccountId
-}
-
-export class CurrencyBuilder {
-	static Native(): Currency {
-		return {
-			native: null,
-		};
-	}
-	static Custom(value: AccountId): Currency {
-		return {
-			custom: value,
-		};
-	}
-}
-
-export enum ListingStatus {
-	onSale = 'OnSale',
-	sold = 'Sold',
-	cancelled = 'Cancelled'
 }
 
 export type AuctionInfo = {

@@ -41,7 +41,7 @@ pub trait Auction {
     #[ink(message)]
     fn get_auction_by_index(&self, index: u128) -> Option<data::Auction>;
 
-    /// List an NFT for auction
+    /// List a NFT for auction
     ///
     /// # Note
     /// This function will transfer the NFT from the caller to the Auction contract.
@@ -167,7 +167,7 @@ pub trait Auction {
     #[ink(message, payable)]
     fn bid_nft(&mut self, auction_id: u128, price: u128) -> ProjectResult<()>;
 
-    /// Claim an NFT from an auction
+    /// Claim a NFT from an auction
     ///
     /// # Note
     ///
