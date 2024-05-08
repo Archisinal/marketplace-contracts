@@ -222,13 +222,17 @@ pub trait MarketplaceImpl:
             },
         )?;
 
-        if Self::env().transferred_value() < total_price_native {
-            return Err(ArchisinalError::InsufficientFunds);
-        } else if Self::env().transferred_value() > total_price_native {
-            let refund_amount = Self::env().transferred_value() - total_price_native;
-            Self::env()
-                .transfer(Self::env().caller(), refund_amount)
-                .map_err(|_| ArchisinalError::TransferNativeError)?;
+        match Self::env().transferred_value().cmp(&total_price_native) {
+            std::cmp::Ordering::Less => {
+                return Err(ArchisinalError::InsufficientFunds);
+            }
+            std::cmp::Ordering::Greater => {
+                let refund_amount = Self::env().transferred_value() - total_price_native;
+                Self::env()
+                    .transfer(Self::env().caller(), refund_amount)
+                    .map_err(|_| ArchisinalError::TransferNativeError)?;
+            }
+            std::cmp::Ordering::Equal => {}
         }
 
         listings.iter_mut().try_for_each(|listing| {

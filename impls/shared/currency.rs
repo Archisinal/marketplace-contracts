@@ -126,15 +126,18 @@ impl Currency {
     pub fn assure_transfer(&self, amount: u128) -> ProjectResult<()> {
         match self {
             Currency::Native => {
-                if Self::env().transferred_value() == amount {
-                    Ok(())
-                } else if Self::env().transferred_value() > amount {
-                    let refund_amount = Self::env().transferred_value() - amount;
-                    Self::env()
-                        .transfer(Self::env().caller(), refund_amount)
-                        .map_err(|_| ArchisinalError::TransferNativeError)
-                } else {
-                    Err(ArchisinalError::TransferNativeError)
+                match Self::env().transferred_value().cmp(&amount) {
+                    std::cmp::Ordering::Less => {
+                        Err(ArchisinalError::TransferNativeError)
+                    }
+                    std::cmp::Ordering::Greater => {
+                        let refund_amount = Self::env().transferred_value() - amount;
+                        Self::env()
+                            .transfer(Self::env().caller(), refund_amount)
+                            .map_err(|_| ArchisinalError::TransferNativeError)
+                    }
+                    std::cmp::Ordering::Equal => Ok(())
+
                 }
             }
             Currency::Custom(_) => Ok(()),

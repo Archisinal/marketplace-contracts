@@ -278,7 +278,7 @@ pub trait AuctionImpl:
 
             PSP34Ref::transfer(
                 &auction.collection,
-                auction.creator.clone(),
+                auction.creator,
                 auction.token_id.clone(),
                 vec![],
             )?;
