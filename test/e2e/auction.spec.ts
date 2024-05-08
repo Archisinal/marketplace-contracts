@@ -87,7 +87,7 @@ describe(E2E_PREFIX + 'Auction', () => {
   })
 
   describe('List NFT for Auction', () => {
-    it('should list an NFT for auction under normal circumstances', async () => {
+    it('should list a NFT for auction under normal circumstances', async () => {
       await expect(mintAndListAuction(contract, nft, psp22, TOKEN_ID_1, 100, 1)).to.eventually.be.fulfilled
     })
   })
@@ -143,7 +143,7 @@ describe(E2E_PREFIX + 'Auction', () => {
   })
 
   describe('Claim NFT', () => {
-    it('should claim an NFT from an auction under normal circumstances', async () => {
+    it('should claim a NFT from an auction under normal circumstances', async () => {
       await mintAndListAuction(contract, nft, psp22, TOKEN_ID_1, 100, 1, false, 300, 100)
 
       await contract.tx.addTimestamp(110);

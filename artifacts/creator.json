@@ -1,8 +1,8 @@
 {
   "source": {
-    "hash": "0x64db6e0098b9fe0c8640b8de7dba24448fc29512b21960b62dcef9d448122eb3",
+    "hash": "0xf8c60ec6ea5c0ffa3dec31cff2a2c885db4ba77001eaad1480c3cf280456e6eb",
     "language": "ink! 4.3.0",
-    "compiler": "rustc 1.75.0",
+    "compiler": "rustc 1.76.0",
     "build_info": {
       "build_mode": "Release",
       "cargo_contract_version": "3.2.0",
@@ -175,6 +175,65 @@
         "args": [],
         "default": false,
         "docs": [],
+        "label": "Ownable::renounce_ownership",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 17
+        },
+        "selector": "0x5e228753"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "Ownable::owner",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 20
+        },
+        "selector": "0x4fa43c8c"
+      },
+      {
+        "args": [
+          {
+            "label": "new_owner",
+            "type": {
+              "displayName": [
+                "ownable_external",
+                "TransferOwnershipInput1"
+              ],
+              "type": 0
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "Ownable::transfer_ownership",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 17
+        },
+        "selector": "0x11f43efd"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
         "label": "User::get_user_data",
         "mutates": false,
         "payable": false,
@@ -183,7 +242,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 17
+          "type": 22
         },
         "selector": "0xc510cead"
       },
@@ -210,68 +269,9 @@
             "ink",
             "MessageResult"
           ],
-          "type": 18
+          "type": 23
         },
         "selector": "0xda164d97"
-      },
-      {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "Ownable::renounce_ownership",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 25
-        },
-        "selector": "0x5e228753"
-      },
-      {
-        "args": [
-          {
-            "label": "new_owner",
-            "type": {
-              "displayName": [
-                "ownable_external",
-                "TransferOwnershipInput1"
-              ],
-              "type": 0
-            }
-          }
-        ],
-        "default": false,
-        "docs": [],
-        "label": "Ownable::transfer_ownership",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 25
-        },
-        "selector": "0x11f43efd"
-      },
-      {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "Ownable::owner",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 27
-        },
-        "selector": "0x4fa43c8c"
       },
       {
         "args": [
@@ -961,6 +961,191 @@
               {
                 "fields": [
                   {
+                    "type": 18
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 11
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 18
+          },
+          {
+            "name": "E",
+            "type": 11
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 10
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 19
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 10
+          },
+          {
+            "name": "E",
+            "type": 19
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "CallerIsNotOwner"
+              },
+              {
+                "index": 1,
+                "name": "NewOwnerIsZero"
+              }
+            ]
+          }
+        },
+        "path": [
+          "openbrush_contracts",
+          "traits",
+          "errors",
+          "ownable",
+          "OwnableError"
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 21
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 11
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 21
+          },
+          {
+            "name": "E",
+            "type": 11
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "None"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 0
+                  }
+                ],
+                "index": 1,
+                "name": "Some"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 0
+          }
+        ],
+        "path": [
+          "Option"
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
                     "type": 12
                   }
                 ],
@@ -995,7 +1180,7 @@
       }
     },
     {
-      "id": 18,
+      "id": 23,
       "type": {
         "def": {
           "variant": {
@@ -1003,7 +1188,7 @@
               {
                 "fields": [
                   {
-                    "type": 19
+                    "type": 24
                   }
                 ],
                 "index": 0,
@@ -1024,7 +1209,7 @@
         "params": [
           {
             "name": "T",
-            "type": 19
+            "type": 24
           },
           {
             "name": "E",
@@ -1037,7 +1222,7 @@
       }
     },
     {
-      "id": 19,
+      "id": 24,
       "type": {
         "def": {
           "variant": {
@@ -1054,7 +1239,7 @@
               {
                 "fields": [
                   {
-                    "type": 20
+                    "type": 25
                   }
                 ],
                 "index": 1,
@@ -1070,7 +1255,7 @@
           },
           {
             "name": "E",
-            "type": 20
+            "type": 25
           }
         ],
         "path": [
@@ -1079,7 +1264,7 @@
       }
     },
     {
-      "id": 20,
+      "id": 25,
       "type": {
         "def": {
           "variant": {
@@ -1098,7 +1283,7 @@
               },
               {
                 "index": 3,
-                "name": "CreatorIsNotCaller"
+                "name": "ListingPriceIsZero"
               },
               {
                 "index": 4,
@@ -1110,146 +1295,138 @@
               },
               {
                 "index": 6,
-                "name": "CallerIsAuctionOwner"
-              },
-              {
-                "index": 7,
                 "name": "AccountAlreadyExists"
               },
               {
-                "index": 8,
+                "index": 7,
                 "name": "InsufficientFunds"
               },
               {
-                "index": 9,
+                "index": 8,
                 "name": "AuctionPriceIsZero"
               },
               {
-                "index": 10,
+                "index": 9,
                 "name": "AuctionEndTimeIsBeforeStartTime"
               },
               {
-                "index": 11,
+                "index": 10,
                 "name": "CollectionOwnerNotFound"
               },
               {
-                "index": 12,
-                "name": "AuctionHasNoBids"
-              },
-              {
-                "index": 13,
+                "index": 11,
                 "name": "AuctionNotEnded"
               },
               {
-                "index": 14,
+                "index": 12,
                 "name": "BidPriceTooLow"
               },
               {
-                "index": 15,
+                "index": 13,
                 "name": "AuctionEnded"
               },
               {
-                "index": 16,
+                "index": 14,
                 "name": "AuctionNotStarted"
               },
               {
-                "index": 17,
+                "index": 15,
                 "name": "AuctionNotInAuction"
               },
               {
-                "index": 18,
+                "index": 16,
                 "name": "ListingNotOnSale"
               },
               {
-                "index": 19,
+                "index": 17,
                 "name": "AuctionNotWaiting"
               },
               {
-                "index": 20,
+                "index": 18,
                 "name": "CallerIsNotAuctionOwner"
               },
               {
-                "index": 21,
+                "index": 19,
                 "name": "CallerIsListingOwner"
               },
               {
-                "index": 22,
+                "index": 20,
                 "name": "CallerIsNotListingOwner"
               },
               {
-                "index": 23,
+                "index": 21,
                 "name": "AuctionNotFound"
               },
               {
-                "index": 24,
+                "index": 22,
                 "name": "ListingNotFound"
               },
               {
-                "index": 25,
+                "index": 23,
                 "name": "IntegerOverflow"
               },
               {
-                "index": 26,
+                "index": 24,
                 "name": "IntegerUnderflow"
               },
               {
-                "index": 27,
+                "index": 25,
                 "name": "CollectionNotFound"
               },
               {
-                "index": 28,
+                "index": 26,
                 "name": "CollectionIsBanned"
               },
               {
-                "index": 29,
+                "index": 27,
                 "name": "CollectionIsNotWhitelisted"
               },
               {
-                "index": 30,
+                "index": 28,
                 "name": "CallerIsNotNFTOwner"
               },
               {
-                "index": 31,
+                "index": 29,
                 "name": "TransferNativeError"
               },
               {
                 "fields": [
                   {
-                    "type": 21,
+                    "type": 19,
                     "typeName": "ownable::OwnableError"
                   }
                 ],
-                "index": 32,
+                "index": 30,
                 "name": "Ownable"
               },
               {
                 "fields": [
                   {
-                    "type": 22,
+                    "type": 26,
                     "typeName": "access_control::AccessControlError"
                   }
                 ],
-                "index": 33,
+                "index": 31,
                 "name": "AccessControl"
               },
               {
                 "fields": [
                   {
-                    "type": 23,
+                    "type": 27,
                     "typeName": "psp34::PSP34Error"
                   }
                 ],
-                "index": 34,
+                "index": 32,
                 "name": "PSP34"
               },
               {
                 "fields": [
                   {
-                    "type": 24,
+                    "type": 28,
                     "typeName": "psp22::PSP22Error"
                   }
                 ],
-                "index": 35,
+                "index": 33,
                 "name": "PSP22"
               },
               {
@@ -1259,7 +1436,7 @@
                     "typeName": "String"
                   }
                 ],
-                "index": 36,
+                "index": 34,
                 "name": "Other"
               }
             ]
@@ -1273,33 +1450,7 @@
       }
     },
     {
-      "id": 21,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "index": 0,
-                "name": "CallerIsNotOwner"
-              },
-              {
-                "index": 1,
-                "name": "NewOwnerIsZero"
-              }
-            ]
-          }
-        },
-        "path": [
-          "openbrush_contracts",
-          "traits",
-          "errors",
-          "ownable",
-          "OwnableError"
-        ]
-      }
-    },
-    {
-      "id": 22,
+      "id": 26,
       "type": {
         "def": {
           "variant": {
@@ -1329,7 +1480,7 @@
       }
     },
     {
-      "id": 23,
+      "id": 27,
       "type": {
         "def": {
           "variant": {
@@ -1383,7 +1534,7 @@
       }
     },
     {
-      "id": 24,
+      "id": 28,
       "type": {
         "def": {
           "variant": {
@@ -1433,165 +1584,6 @@
           "errors",
           "psp22",
           "PSP22Error"
-        ]
-      }
-    },
-    {
-      "id": 25,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 26
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 11
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 26
-          },
-          {
-            "name": "E",
-            "type": 11
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 26,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 10
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 21
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 10
-          },
-          {
-            "name": "E",
-            "type": 21
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 27,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 28
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 11
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 28
-          },
-          {
-            "name": "E",
-            "type": 11
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 28,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "index": 0,
-                "name": "None"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 0
-                  }
-                ],
-                "index": 1,
-                "name": "Some"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 0
-          }
-        ],
-        "path": [
-          "Option"
         ]
       }
     },
@@ -1722,7 +1714,7 @@
               {
                 "fields": [
                   {
-                    "type": 21,
+                    "type": 19,
                     "typeName": "OwnableError"
                   }
                 ],
@@ -1732,7 +1724,7 @@
               {
                 "fields": [
                   {
-                    "type": 22,
+                    "type": 26,
                     "typeName": "AccessControlError"
                   }
                 ],

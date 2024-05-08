@@ -252,7 +252,7 @@
     </span><span class="attr">#[ink(message)]
     </span><span class="kw">fn </span>get_auction_by_index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: u128) -&gt; <span class="prelude-ty">Option</span>&lt;data::Auction&gt;;
 
-    <span class="doccomment">/// List an NFT for auction
+    <span class="doccomment">/// List a NFT for auction
     ///
     /// # Note
     /// This function will transfer the NFT from the caller to the Auction contract.
@@ -389,7 +389,7 @@
     </span><span class="attr">#[ink(message, payable)]
     </span><span class="kw">fn </span>bid_nft(<span class="kw-2">&amp;mut </span><span class="self">self</span>, auction_id: u128, price: u128) -&gt; ProjectResult&lt;()&gt;;
 
-    <span class="doccomment">/// Claim an NFT from an auction
+    <span class="doccomment">/// Claim a NFT from an auction
     ///
     /// # Note
     ///

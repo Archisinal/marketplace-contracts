@@ -227,6 +227,7 @@ pub trait AuctionImpl:
 
         let mut currency = auction.currency.clone();
 
+        currency.assure_transfer(price)?;
         currency.transfer_from(caller, contract_address, price)?;
 
         if let Some(bidder) = current_bidder {
@@ -277,7 +278,7 @@ pub trait AuctionImpl:
 
             PSP34Ref::transfer(
                 &auction.collection,
-                auction.creator.clone(),
+                auction.creator,
                 auction.token_id.clone(),
                 vec![],
             )?;
@@ -306,8 +307,7 @@ pub trait AuctionImpl:
 
         currency.transfer(auction.creator, without_fee)?;
 
-        let collection_owner = OwnableRef::owner(&auction.collection)
-            .unwrap_or(auction.creator);
+        let collection_owner = OwnableRef::owner(&auction.collection).unwrap_or(auction.creator);
 
         currency.transfer(collection_owner, fee)?;
 

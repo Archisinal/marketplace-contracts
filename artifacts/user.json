@@ -1,8 +1,8 @@
 {
   "source": {
-    "hash": "0x5698ce59a28960f20f6bf5088136657781fe63d31b62789ffa39258d1db75dd0",
+    "hash": "0x8ed0b17e6287dd115b2b106849d4b68d053eff9d3844d290bfb798ad47cf8536",
     "language": "ink! 4.3.0",
-    "compiler": "rustc 1.75.0",
+    "compiler": "rustc 1.76.0",
     "build_info": {
       "build_mode": "Release",
       "cargo_contract_version": "3.2.0",
@@ -215,38 +215,6 @@
         "selector": "0xda164d97"
       },
       {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "Ownable::owner",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 25
-        },
-        "selector": "0x4fa43c8c"
-      },
-      {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "Ownable::renounce_ownership",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 27
-        },
-        "selector": "0x5e228753"
-      },
-      {
         "args": [
           {
             "label": "new_owner",
@@ -269,9 +237,41 @@
             "ink",
             "MessageResult"
           ],
-          "type": 27
+          "type": 25
         },
         "selector": "0x11f43efd"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "Ownable::renounce_ownership",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 25
+        },
+        "selector": "0x5e228753"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "Ownable::owner",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 27
+        },
+        "selector": "0x4fa43c8c"
       },
       {
         "args": [
@@ -1098,7 +1098,7 @@
               },
               {
                 "index": 3,
-                "name": "CreatorIsNotCaller"
+                "name": "ListingPriceIsZero"
               },
               {
                 "index": 4,
@@ -1110,106 +1110,98 @@
               },
               {
                 "index": 6,
-                "name": "CallerIsAuctionOwner"
-              },
-              {
-                "index": 7,
                 "name": "AccountAlreadyExists"
               },
               {
-                "index": 8,
+                "index": 7,
                 "name": "InsufficientFunds"
               },
               {
-                "index": 9,
+                "index": 8,
                 "name": "AuctionPriceIsZero"
               },
               {
-                "index": 10,
+                "index": 9,
                 "name": "AuctionEndTimeIsBeforeStartTime"
               },
               {
-                "index": 11,
+                "index": 10,
                 "name": "CollectionOwnerNotFound"
               },
               {
-                "index": 12,
-                "name": "AuctionHasNoBids"
-              },
-              {
-                "index": 13,
+                "index": 11,
                 "name": "AuctionNotEnded"
               },
               {
-                "index": 14,
+                "index": 12,
                 "name": "BidPriceTooLow"
               },
               {
-                "index": 15,
+                "index": 13,
                 "name": "AuctionEnded"
               },
               {
-                "index": 16,
+                "index": 14,
                 "name": "AuctionNotStarted"
               },
               {
-                "index": 17,
+                "index": 15,
                 "name": "AuctionNotInAuction"
               },
               {
-                "index": 18,
+                "index": 16,
                 "name": "ListingNotOnSale"
               },
               {
-                "index": 19,
+                "index": 17,
                 "name": "AuctionNotWaiting"
               },
               {
-                "index": 20,
+                "index": 18,
                 "name": "CallerIsNotAuctionOwner"
               },
               {
-                "index": 21,
+                "index": 19,
                 "name": "CallerIsListingOwner"
               },
               {
-                "index": 22,
+                "index": 20,
                 "name": "CallerIsNotListingOwner"
               },
               {
-                "index": 23,
+                "index": 21,
                 "name": "AuctionNotFound"
               },
               {
-                "index": 24,
+                "index": 22,
                 "name": "ListingNotFound"
               },
               {
-                "index": 25,
+                "index": 23,
                 "name": "IntegerOverflow"
               },
               {
-                "index": 26,
+                "index": 24,
                 "name": "IntegerUnderflow"
               },
               {
-                "index": 27,
+                "index": 25,
                 "name": "CollectionNotFound"
               },
               {
-                "index": 28,
+                "index": 26,
                 "name": "CollectionIsBanned"
               },
               {
-                "index": 29,
+                "index": 27,
                 "name": "CollectionIsNotWhitelisted"
               },
               {
-                "index": 30,
+                "index": 28,
                 "name": "CallerIsNotNFTOwner"
               },
               {
-                "index": 31,
+                "index": 29,
                 "name": "TransferNativeError"
               },
               {
@@ -1219,7 +1211,7 @@
                     "typeName": "ownable::OwnableError"
                   }
                 ],
-                "index": 32,
+                "index": 30,
                 "name": "Ownable"
               },
               {
@@ -1229,7 +1221,7 @@
                     "typeName": "access_control::AccessControlError"
                   }
                 ],
-                "index": 33,
+                "index": 31,
                 "name": "AccessControl"
               },
               {
@@ -1239,7 +1231,7 @@
                     "typeName": "psp34::PSP34Error"
                   }
                 ],
-                "index": 34,
+                "index": 32,
                 "name": "PSP34"
               },
               {
@@ -1249,7 +1241,7 @@
                     "typeName": "psp22::PSP22Error"
                   }
                 ],
-                "index": 35,
+                "index": 33,
                 "name": "PSP22"
               },
               {
@@ -1259,7 +1251,7 @@
                     "typeName": "String"
                   }
                 ],
-                "index": 36,
+                "index": 34,
                 "name": "Other"
               }
             ]
@@ -1485,17 +1477,22 @@
           "variant": {
             "variants": [
               {
+                "fields": [
+                  {
+                    "type": 10
+                  }
+                ],
                 "index": 0,
-                "name": "None"
+                "name": "Ok"
               },
               {
                 "fields": [
                   {
-                    "type": 0
+                    "type": 21
                   }
                 ],
                 "index": 1,
-                "name": "Some"
+                "name": "Err"
               }
             ]
           }
@@ -1503,11 +1500,15 @@
         "params": [
           {
             "name": "T",
-            "type": 0
+            "type": 10
+          },
+          {
+            "name": "E",
+            "type": 21
           }
         ],
         "path": [
-          "Option"
+          "Result"
         ]
       }
     },
@@ -1560,22 +1561,17 @@
           "variant": {
             "variants": [
               {
-                "fields": [
-                  {
-                    "type": 10
-                  }
-                ],
                 "index": 0,
-                "name": "Ok"
+                "name": "None"
               },
               {
                 "fields": [
                   {
-                    "type": 21
+                    "type": 0
                   }
                 ],
                 "index": 1,
-                "name": "Err"
+                "name": "Some"
               }
             ]
           }
@@ -1583,15 +1579,11 @@
         "params": [
           {
             "name": "T",
-            "type": 10
-          },
-          {
-            "name": "E",
-            "type": 21
+            "type": 0
           }
         ],
         "path": [
-          "Result"
+          "Option"
         ]
       }
     },

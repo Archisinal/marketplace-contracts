@@ -6,20 +6,95 @@ export enum LangError {
 	couldNotReadInput = 'CouldNotReadInput'
 }
 
+export type Listing = {
+	id: (string | number | BN),
+	creator: AccountId,
+	collection: AccountId,
+	tokenId: Id,
+	price: (string | number | BN),
+	currency: Currency,
+	status: ListingStatus,
+	royalty: (number | string | BN)
+}
+
+export interface Id {
+	u8 ? : (number | string | BN),
+	u16 ? : (number | string | BN),
+	u32 ? : (number | string | BN),
+	u64 ? : (number | string | BN),
+	u128 ? : (string | number | BN),
+	bytes ? : Array<(number | string | BN)>
+}
+
+export class IdBuilder {
+	static U8(value: (number | string | BN)): Id {
+		return {
+			u8: value,
+		};
+	}
+	static U16(value: (number | string | BN)): Id {
+		return {
+			u16: value,
+		};
+	}
+	static U32(value: (number | string | BN)): Id {
+		return {
+			u32: value,
+		};
+	}
+	static U64(value: (number | string | BN)): Id {
+		return {
+			u64: value,
+		};
+	}
+	static U128(value: (string | number | BN)): Id {
+		return {
+			u128: value,
+		};
+	}
+	static Bytes(value: Array<(number | string | BN)>): Id {
+		return {
+			bytes: value,
+		};
+	}
+}
+
+export interface Currency {
+	native ? : null,
+	custom ? : AccountId
+}
+
+export class CurrencyBuilder {
+	static Native(): Currency {
+		return {
+			native: null,
+		};
+	}
+	static Custom(value: AccountId): Currency {
+		return {
+			custom: value,
+		};
+	}
+}
+
+export enum ListingStatus {
+	onSale = 'OnSale',
+	sold = 'Sold',
+	cancelled = 'Cancelled'
+}
+
 export interface ArchisinalError {
 	noOwner ? : null,
 	adminAccessError ? : null,
 	auctionMinBidStepIsZero ? : null,
-	creatorIsNotCaller ? : null,
+	listingPriceIsZero ? : null,
 	codehashIsBanned ? : null,
 	auctionStartTimeIsBeforeNow ? : null,
-	callerIsAuctionOwner ? : null,
 	accountAlreadyExists ? : null,
 	insufficientFunds ? : null,
 	auctionPriceIsZero ? : null,
 	auctionEndTimeIsBeforeStartTime ? : null,
 	collectionOwnerNotFound ? : null,
-	auctionHasNoBids ? : null,
 	auctionNotEnded ? : null,
 	bidPriceTooLow ? : null,
 	auctionEnded ? : null,
@@ -62,9 +137,9 @@ export class ArchisinalErrorBuilder {
 			auctionMinBidStepIsZero: null,
 		};
 	}
-	static CreatorIsNotCaller(): ArchisinalError {
+	static ListingPriceIsZero(): ArchisinalError {
 		return {
-			creatorIsNotCaller: null,
+			listingPriceIsZero: null,
 		};
 	}
 	static CodehashIsBanned(): ArchisinalError {
@@ -75,11 +150,6 @@ export class ArchisinalErrorBuilder {
 	static AuctionStartTimeIsBeforeNow(): ArchisinalError {
 		return {
 			auctionStartTimeIsBeforeNow: null,
-		};
-	}
-	static CallerIsAuctionOwner(): ArchisinalError {
-		return {
-			callerIsAuctionOwner: null,
 		};
 	}
 	static AccountAlreadyExists(): ArchisinalError {
@@ -105,11 +175,6 @@ export class ArchisinalErrorBuilder {
 	static CollectionOwnerNotFound(): ArchisinalError {
 		return {
 			collectionOwnerNotFound: null,
-		};
-	}
-	static AuctionHasNoBids(): ArchisinalError {
-		return {
-			auctionHasNoBids: null,
 		};
 	}
 	static AuctionNotEnded(): ArchisinalError {
@@ -327,83 +392,6 @@ export class PSP22ErrorBuilder {
 			safeTransferCheckFailed: value,
 		};
 	}
-}
-
-export type Listing = {
-	id: (string | number | BN),
-	creator: AccountId,
-	collection: AccountId,
-	tokenId: Id,
-	price: (string | number | BN),
-	currency: Currency,
-	status: ListingStatus,
-	royalty: (number | string | BN)
-}
-
-export interface Id {
-	u8 ? : (number | string | BN),
-	u16 ? : (number | string | BN),
-	u32 ? : (number | string | BN),
-	u64 ? : (number | string | BN),
-	u128 ? : (string | number | BN),
-	bytes ? : Array<(number | string | BN)>
-}
-
-export class IdBuilder {
-	static U8(value: (number | string | BN)): Id {
-		return {
-			u8: value,
-		};
-	}
-	static U16(value: (number | string | BN)): Id {
-		return {
-			u16: value,
-		};
-	}
-	static U32(value: (number | string | BN)): Id {
-		return {
-			u32: value,
-		};
-	}
-	static U64(value: (number | string | BN)): Id {
-		return {
-			u64: value,
-		};
-	}
-	static U128(value: (string | number | BN)): Id {
-		return {
-			u128: value,
-		};
-	}
-	static Bytes(value: Array<(number | string | BN)>): Id {
-		return {
-			bytes: value,
-		};
-	}
-}
-
-export interface Currency {
-	native ? : null,
-	custom ? : AccountId
-}
-
-export class CurrencyBuilder {
-	static Native(): Currency {
-		return {
-			native: null,
-		};
-	}
-	static Custom(value: AccountId): Currency {
-		return {
-			custom: value,
-		};
-	}
-}
-
-export enum ListingStatus {
-	onSale = 'OnSale',
-	sold = 'Sold',
-	cancelled = 'Cancelled'
 }
 
 export type AuctionInfo = {

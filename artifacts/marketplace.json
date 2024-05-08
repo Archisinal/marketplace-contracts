@@ -1,8 +1,8 @@
 {
   "source": {
-    "hash": "0x32948e194d0def7c871127a9c66af374f7c5ac55442a5ee3a2f912c44fffe6e4",
+    "hash": "0x676bd7452c1ce56378bf0b68b20ed0a43ce4ae22294473b74e89b3627f9acd56",
     "language": "ink! 4.3.0",
-    "compiler": "rustc 1.75.0",
+    "compiler": "rustc 1.76.0",
     "build_info": {
       "build_mode": "Release",
       "cargo_contract_version": "3.2.0",
@@ -177,7 +177,7 @@
               "displayName": [
                 "Id"
               ],
-              "type": 23
+              "type": 14
             }
           },
           {
@@ -201,7 +201,7 @@
               "displayName": [
                 "Currency"
               ],
-              "type": 24
+              "type": 15
             }
           }
         ],
@@ -289,7 +289,7 @@
               "displayName": [
                 "Vec"
               ],
-              "type": 28
+              "type": 17
             }
           }
         ],
@@ -341,7 +341,7 @@
               "displayName": [
                 "Id"
               ],
-              "type": 23
+              "type": 14
             }
           },
           {
@@ -400,7 +400,7 @@
               "displayName": [
                 "Currency"
               ],
-              "type": 24
+              "type": 15
             }
           }
         ],
@@ -660,49 +660,6 @@
     },
     "messages": [
       {
-        "args": [],
-        "default": false,
-        "docs": [],
-        "label": "Marketplace::get_listing_count",
-        "mutates": false,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 11
-        },
-        "selector": "0x69def6f2"
-      },
-      {
-        "args": [
-          {
-            "label": "listing_id",
-            "type": {
-              "displayName": [
-                "marketplace_external",
-                "CancelListingInput1"
-              ],
-              "type": 5
-            }
-          }
-        ],
-        "default": false,
-        "docs": [],
-        "label": "Marketplace::cancel_listing",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 12
-        },
-        "selector": "0xf7262b0b"
-      },
-      {
         "args": [
           {
             "label": "index",
@@ -725,9 +682,79 @@
             "ink",
             "MessageResult"
           ],
-          "type": 20
+          "type": 11
         },
         "selector": "0xa8fd3deb"
+      },
+      {
+        "args": [
+          {
+            "label": "ids",
+            "type": {
+              "displayName": [
+                "marketplace_external",
+                "BuyBatchInput1"
+              ],
+              "type": 17
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "Marketplace::buy_batch",
+        "mutates": true,
+        "payable": true,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 18
+        },
+        "selector": "0xe95076ad"
+      },
+      {
+        "args": [],
+        "default": false,
+        "docs": [],
+        "label": "Marketplace::get_listing_count",
+        "mutates": false,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 26
+        },
+        "selector": "0x69def6f2"
+      },
+      {
+        "args": [
+          {
+            "label": "listing_id",
+            "type": {
+              "displayName": [
+                "marketplace_external",
+                "BuyNftInput1"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "Marketplace::buy_nft",
+        "mutates": true,
+        "payable": true,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 18
+        },
+        "selector": "0xc68fb1f7"
       },
       {
         "args": [
@@ -758,7 +785,7 @@
                 "marketplace_external",
                 "ListNftForSaleInput3"
               ],
-              "type": 23
+              "type": 14
             }
           },
           {
@@ -778,7 +805,7 @@
                 "marketplace_external",
                 "ListNftForSaleInput5"
               ],
-              "type": 24
+              "type": 15
             }
           }
         ],
@@ -792,7 +819,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 26
+          "type": 27
         },
         "selector": "0x3473a450"
       },
@@ -803,7 +830,7 @@
             "type": {
               "displayName": [
                 "marketplace_external",
-                "BuyNftInput1"
+                "CancelListingInput1"
               ],
               "type": 5
             }
@@ -811,61 +838,7 @@
         ],
         "default": false,
         "docs": [],
-        "label": "Marketplace::buy_nft",
-        "mutates": true,
-        "payable": true,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 12
-        },
-        "selector": "0xc68fb1f7"
-      },
-      {
-        "args": [
-          {
-            "label": "ids",
-            "type": {
-              "displayName": [
-                "marketplace_external",
-                "BuyBatchInput1"
-              ],
-              "type": 28
-            }
-          }
-        ],
-        "default": false,
-        "docs": [],
-        "label": "Marketplace::buy_batch",
-        "mutates": true,
-        "payable": true,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 12
-        },
-        "selector": "0xe95076ad"
-      },
-      {
-        "args": [
-          {
-            "label": "auction_info",
-            "type": {
-              "displayName": [
-                "auction_external",
-                "ListNftForAuctionInput1"
-              ],
-              "type": 29
-            }
-          }
-        ],
-        "default": false,
-        "docs": [],
-        "label": "Auction::list_nft_for_auction",
+        "label": "Marketplace::cancel_listing",
         "mutates": true,
         "payable": false,
         "returnType": {
@@ -873,36 +846,9 @@
             "ink",
             "MessageResult"
           ],
-          "type": 26
+          "type": 18
         },
-        "selector": "0x50a31f53"
-      },
-      {
-        "args": [
-          {
-            "label": "auction_id",
-            "type": {
-              "displayName": [
-                "auction_external",
-                "StartAuctionInput1"
-              ],
-              "type": 5
-            }
-          }
-        ],
-        "default": false,
-        "docs": [],
-        "label": "Auction::start_auction",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 12
-        },
-        "selector": "0xdfceda09"
+        "selector": "0xf7262b0b"
       },
       {
         "args": [
@@ -937,9 +883,63 @@
             "ink",
             "MessageResult"
           ],
-          "type": 12
+          "type": 18
         },
         "selector": "0x7333d070"
+      },
+      {
+        "args": [
+          {
+            "label": "auction_id",
+            "type": {
+              "displayName": [
+                "auction_external",
+                "ClaimNftInput1"
+              ],
+              "type": 5
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "Auction::claim_nft",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 18
+        },
+        "selector": "0x83293410"
+      },
+      {
+        "args": [
+          {
+            "label": "auction_info",
+            "type": {
+              "displayName": [
+                "auction_external",
+                "ListNftForAuctionInput1"
+              ],
+              "type": 29
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "Auction::list_nft_for_auction",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 27
+        },
+        "selector": "0x50a31f53"
       },
       {
         "args": [
@@ -969,20 +969,31 @@
         "selector": "0xef9eba92"
       },
       {
-        "args": [],
+        "args": [
+          {
+            "label": "auction_id",
+            "type": {
+              "displayName": [
+                "auction_external",
+                "StartAuctionInput1"
+              ],
+              "type": 5
+            }
+          }
+        ],
         "default": false,
         "docs": [],
-        "label": "Auction::get_auction_count",
-        "mutates": false,
+        "label": "Auction::start_auction",
+        "mutates": true,
         "payable": false,
         "returnType": {
           "displayName": [
             "ink",
             "MessageResult"
           ],
-          "type": 11
+          "type": 18
         },
-        "selector": "0xac0668e4"
+        "selector": "0xdfceda09"
       },
       {
         "args": [
@@ -1007,36 +1018,25 @@
             "ink",
             "MessageResult"
           ],
-          "type": 12
+          "type": 18
         },
         "selector": "0x31c2fa87"
       },
       {
-        "args": [
-          {
-            "label": "auction_id",
-            "type": {
-              "displayName": [
-                "auction_external",
-                "ClaimNftInput1"
-              ],
-              "type": 5
-            }
-          }
-        ],
+        "args": [],
         "default": false,
         "docs": [],
-        "label": "Auction::claim_nft",
-        "mutates": true,
+        "label": "Auction::get_auction_count",
+        "mutates": false,
         "payable": false,
         "returnType": {
           "displayName": [
             "ink",
             "MessageResult"
           ],
-          "type": 12
+          "type": 26
         },
-        "selector": "0x83293410"
+        "selector": "0xac0668e4"
       },
       {
         "args": [
@@ -1061,7 +1061,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 12
+          "type": 18
         },
         "selector": "0xb1d395e2"
       },
@@ -1088,7 +1088,7 @@
             "ink",
             "MessageResult"
           ],
-          "type": 12
+          "type": 18
         },
         "selector": "0x05e47c48"
       },
@@ -1193,43 +1193,6 @@
           "type": 39
         },
         "selector": "0x11f43efd"
-      },
-      {
-        "args": [
-          {
-            "label": "role",
-            "type": {
-              "displayName": [
-                "accesscontrol_external",
-                "RevokeRoleInput1"
-              ],
-              "type": 3
-            }
-          },
-          {
-            "label": "account",
-            "type": {
-              "displayName": [
-                "accesscontrol_external",
-                "RevokeRoleInput2"
-              ],
-              "type": 33
-            }
-          }
-        ],
-        "default": false,
-        "docs": [],
-        "label": "AccessControl::revoke_role",
-        "mutates": true,
-        "payable": false,
-        "returnType": {
-          "displayName": [
-            "ink",
-            "MessageResult"
-          ],
-          "type": 41
-        },
-        "selector": "0x6e4f0991"
       },
       {
         "args": [
@@ -1368,6 +1331,43 @@
           "type": 43
         },
         "selector": "0x83da3bb2"
+      },
+      {
+        "args": [
+          {
+            "label": "role",
+            "type": {
+              "displayName": [
+                "accesscontrol_external",
+                "RevokeRoleInput1"
+              ],
+              "type": 3
+            }
+          },
+          {
+            "label": "account",
+            "type": {
+              "displayName": [
+                "accesscontrol_external",
+                "RevokeRoleInput2"
+              ],
+              "type": 33
+            }
+          }
+        ],
+        "default": false,
+        "docs": [],
+        "label": "AccessControl::revoke_role",
+        "mutates": true,
+        "payable": false,
+        "returnType": {
+          "displayName": [
+            "ink",
+            "MessageResult"
+          ],
+          "type": 41
+        },
+        "selector": "0x6e4f0991"
       },
       {
         "args": [
@@ -2211,7 +2211,7 @@
               {
                 "fields": [
                   {
-                    "type": 5
+                    "type": 12
                   }
                 ],
                 "index": 0,
@@ -2232,7 +2232,7 @@
         "params": [
           {
             "name": "T",
-            "type": 5
+            "type": 12
           },
           {
             "name": "E",
@@ -2251,505 +2251,13 @@
           "variant": {
             "variants": [
               {
-                "fields": [
-                  {
-                    "type": 13
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 10
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 13
-          },
-          {
-            "name": "E",
-            "type": 10
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 13,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 4
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 14
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 4
-          },
-          {
-            "name": "E",
-            "type": 14
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 14,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "index": 0,
-                "name": "NoOwner"
-              },
-              {
-                "index": 1,
-                "name": "AdminAccessError"
-              },
-              {
-                "index": 2,
-                "name": "AuctionMinBidStepIsZero"
-              },
-              {
-                "index": 3,
-                "name": "CreatorIsNotCaller"
-              },
-              {
-                "index": 4,
-                "name": "CodehashIsBanned"
-              },
-              {
-                "index": 5,
-                "name": "AuctionStartTimeIsBeforeNow"
-              },
-              {
-                "index": 6,
-                "name": "CallerIsAuctionOwner"
-              },
-              {
-                "index": 7,
-                "name": "AccountAlreadyExists"
-              },
-              {
-                "index": 8,
-                "name": "InsufficientFunds"
-              },
-              {
-                "index": 9,
-                "name": "AuctionPriceIsZero"
-              },
-              {
-                "index": 10,
-                "name": "AuctionEndTimeIsBeforeStartTime"
-              },
-              {
-                "index": 11,
-                "name": "CollectionOwnerNotFound"
-              },
-              {
-                "index": 12,
-                "name": "AuctionHasNoBids"
-              },
-              {
-                "index": 13,
-                "name": "AuctionNotEnded"
-              },
-              {
-                "index": 14,
-                "name": "BidPriceTooLow"
-              },
-              {
-                "index": 15,
-                "name": "AuctionEnded"
-              },
-              {
-                "index": 16,
-                "name": "AuctionNotStarted"
-              },
-              {
-                "index": 17,
-                "name": "AuctionNotInAuction"
-              },
-              {
-                "index": 18,
-                "name": "ListingNotOnSale"
-              },
-              {
-                "index": 19,
-                "name": "AuctionNotWaiting"
-              },
-              {
-                "index": 20,
-                "name": "CallerIsNotAuctionOwner"
-              },
-              {
-                "index": 21,
-                "name": "CallerIsListingOwner"
-              },
-              {
-                "index": 22,
-                "name": "CallerIsNotListingOwner"
-              },
-              {
-                "index": 23,
-                "name": "AuctionNotFound"
-              },
-              {
-                "index": 24,
-                "name": "ListingNotFound"
-              },
-              {
-                "index": 25,
-                "name": "IntegerOverflow"
-              },
-              {
-                "index": 26,
-                "name": "IntegerUnderflow"
-              },
-              {
-                "index": 27,
-                "name": "CollectionNotFound"
-              },
-              {
-                "index": 28,
-                "name": "CollectionIsBanned"
-              },
-              {
-                "index": 29,
-                "name": "CollectionIsNotWhitelisted"
-              },
-              {
-                "index": 30,
-                "name": "CallerIsNotNFTOwner"
-              },
-              {
-                "index": 31,
-                "name": "TransferNativeError"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 15,
-                    "typeName": "ownable::OwnableError"
-                  }
-                ],
-                "index": 32,
-                "name": "Ownable"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 16,
-                    "typeName": "access_control::AccessControlError"
-                  }
-                ],
-                "index": 33,
-                "name": "AccessControl"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 17,
-                    "typeName": "psp34::PSP34Error"
-                  }
-                ],
-                "index": 34,
-                "name": "PSP34"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 19,
-                    "typeName": "psp22::PSP22Error"
-                  }
-                ],
-                "index": 35,
-                "name": "PSP22"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 18,
-                    "typeName": "String"
-                  }
-                ],
-                "index": 36,
-                "name": "Other"
-              }
-            ]
-          }
-        },
-        "path": [
-          "archisinal_lib",
-          "traits",
-          "ArchisinalError"
-        ]
-      }
-    },
-    {
-      "id": 15,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "index": 0,
-                "name": "CallerIsNotOwner"
-              },
-              {
-                "index": 1,
-                "name": "NewOwnerIsZero"
-              }
-            ]
-          }
-        },
-        "path": [
-          "openbrush_contracts",
-          "traits",
-          "errors",
-          "ownable",
-          "OwnableError"
-        ]
-      }
-    },
-    {
-      "id": 16,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "index": 0,
-                "name": "InvalidCaller"
-              },
-              {
-                "index": 1,
-                "name": "MissingRole"
-              },
-              {
-                "index": 2,
-                "name": "RoleRedundant"
-              }
-            ]
-          }
-        },
-        "path": [
-          "openbrush_contracts",
-          "traits",
-          "errors",
-          "access_control",
-          "AccessControlError"
-        ]
-      }
-    },
-    {
-      "id": 17,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 18,
-                    "typeName": "String"
-                  }
-                ],
-                "index": 0,
-                "name": "Custom"
-              },
-              {
-                "index": 1,
-                "name": "SelfApprove"
-              },
-              {
-                "index": 2,
-                "name": "NotApproved"
-              },
-              {
-                "index": 3,
-                "name": "TokenExists"
-              },
-              {
-                "index": 4,
-                "name": "TokenNotExists"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 18,
-                    "typeName": "String"
-                  }
-                ],
-                "index": 5,
-                "name": "SafeTransferCheckFailed"
-              }
-            ]
-          }
-        },
-        "path": [
-          "openbrush_contracts",
-          "traits",
-          "errors",
-          "psp34",
-          "PSP34Error"
-        ]
-      }
-    },
-    {
-      "id": 18,
-      "type": {
-        "def": {
-          "primitive": "str"
-        }
-      }
-    },
-    {
-      "id": 19,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 18,
-                    "typeName": "String"
-                  }
-                ],
-                "index": 0,
-                "name": "Custom"
-              },
-              {
-                "index": 1,
-                "name": "InsufficientBalance"
-              },
-              {
-                "index": 2,
-                "name": "InsufficientAllowance"
-              },
-              {
-                "index": 3,
-                "name": "ZeroRecipientAddress"
-              },
-              {
-                "index": 4,
-                "name": "ZeroSenderAddress"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 18,
-                    "typeName": "String"
-                  }
-                ],
-                "index": 5,
-                "name": "SafeTransferCheckFailed"
-              }
-            ]
-          }
-        },
-        "path": [
-          "openbrush_contracts",
-          "traits",
-          "errors",
-          "psp22",
-          "PSP22Error"
-        ]
-      }
-    },
-    {
-      "id": 20,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
-                "fields": [
-                  {
-                    "type": 21
-                  }
-                ],
-                "index": 0,
-                "name": "Ok"
-              },
-              {
-                "fields": [
-                  {
-                    "type": 10
-                  }
-                ],
-                "index": 1,
-                "name": "Err"
-              }
-            ]
-          }
-        },
-        "params": [
-          {
-            "name": "T",
-            "type": 21
-          },
-          {
-            "name": "E",
-            "type": 10
-          }
-        ],
-        "path": [
-          "Result"
-        ]
-      }
-    },
-    {
-      "id": 21,
-      "type": {
-        "def": {
-          "variant": {
-            "variants": [
-              {
                 "index": 0,
                 "name": "None"
               },
               {
                 "fields": [
                   {
-                    "type": 22
+                    "type": 13
                   }
                 ],
                 "index": 1,
@@ -2761,7 +2269,7 @@
         "params": [
           {
             "name": "T",
-            "type": 22
+            "type": 13
           }
         ],
         "path": [
@@ -2770,7 +2278,7 @@
       }
     },
     {
-      "id": 22,
+      "id": 13,
       "type": {
         "def": {
           "composite": {
@@ -2792,7 +2300,7 @@
               },
               {
                 "name": "token_id",
-                "type": 23,
+                "type": 14,
                 "typeName": "Id"
               },
               {
@@ -2802,12 +2310,12 @@
               },
               {
                 "name": "currency",
-                "type": 24,
+                "type": 15,
                 "typeName": "Currency"
               },
               {
                 "name": "status",
-                "type": 25,
+                "type": 16,
                 "typeName": "ListingStatus"
               },
               {
@@ -2828,7 +2336,7 @@
       }
     },
     {
-      "id": 23,
+      "id": 14,
       "type": {
         "def": {
           "variant": {
@@ -2905,7 +2413,7 @@
       }
     },
     {
-      "id": 24,
+      "id": 15,
       "type": {
         "def": {
           "variant": {
@@ -2937,7 +2445,7 @@
       }
     },
     {
-      "id": 25,
+      "id": 16,
       "type": {
         "def": {
           "variant": {
@@ -2967,7 +2475,17 @@
       }
     },
     {
-      "id": 26,
+      "id": 17,
+      "type": {
+        "def": {
+          "sequence": {
+            "type": 5
+          }
+        }
+      }
+    },
+    {
+      "id": 18,
       "type": {
         "def": {
           "variant": {
@@ -2975,7 +2493,7 @@
               {
                 "fields": [
                   {
-                    "type": 27
+                    "type": 19
                   }
                 ],
                 "index": 0,
@@ -2996,7 +2514,449 @@
         "params": [
           {
             "name": "T",
-            "type": 27
+            "type": 19
+          },
+          {
+            "name": "E",
+            "type": 10
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 4
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 20
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 4
+          },
+          {
+            "name": "E",
+            "type": 20
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "NoOwner"
+              },
+              {
+                "index": 1,
+                "name": "AdminAccessError"
+              },
+              {
+                "index": 2,
+                "name": "AuctionMinBidStepIsZero"
+              },
+              {
+                "index": 3,
+                "name": "ListingPriceIsZero"
+              },
+              {
+                "index": 4,
+                "name": "CodehashIsBanned"
+              },
+              {
+                "index": 5,
+                "name": "AuctionStartTimeIsBeforeNow"
+              },
+              {
+                "index": 6,
+                "name": "AccountAlreadyExists"
+              },
+              {
+                "index": 7,
+                "name": "InsufficientFunds"
+              },
+              {
+                "index": 8,
+                "name": "AuctionPriceIsZero"
+              },
+              {
+                "index": 9,
+                "name": "AuctionEndTimeIsBeforeStartTime"
+              },
+              {
+                "index": 10,
+                "name": "CollectionOwnerNotFound"
+              },
+              {
+                "index": 11,
+                "name": "AuctionNotEnded"
+              },
+              {
+                "index": 12,
+                "name": "BidPriceTooLow"
+              },
+              {
+                "index": 13,
+                "name": "AuctionEnded"
+              },
+              {
+                "index": 14,
+                "name": "AuctionNotStarted"
+              },
+              {
+                "index": 15,
+                "name": "AuctionNotInAuction"
+              },
+              {
+                "index": 16,
+                "name": "ListingNotOnSale"
+              },
+              {
+                "index": 17,
+                "name": "AuctionNotWaiting"
+              },
+              {
+                "index": 18,
+                "name": "CallerIsNotAuctionOwner"
+              },
+              {
+                "index": 19,
+                "name": "CallerIsListingOwner"
+              },
+              {
+                "index": 20,
+                "name": "CallerIsNotListingOwner"
+              },
+              {
+                "index": 21,
+                "name": "AuctionNotFound"
+              },
+              {
+                "index": 22,
+                "name": "ListingNotFound"
+              },
+              {
+                "index": 23,
+                "name": "IntegerOverflow"
+              },
+              {
+                "index": 24,
+                "name": "IntegerUnderflow"
+              },
+              {
+                "index": 25,
+                "name": "CollectionNotFound"
+              },
+              {
+                "index": 26,
+                "name": "CollectionIsBanned"
+              },
+              {
+                "index": 27,
+                "name": "CollectionIsNotWhitelisted"
+              },
+              {
+                "index": 28,
+                "name": "CallerIsNotNFTOwner"
+              },
+              {
+                "index": 29,
+                "name": "TransferNativeError"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 21,
+                    "typeName": "ownable::OwnableError"
+                  }
+                ],
+                "index": 30,
+                "name": "Ownable"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 22,
+                    "typeName": "access_control::AccessControlError"
+                  }
+                ],
+                "index": 31,
+                "name": "AccessControl"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 23,
+                    "typeName": "psp34::PSP34Error"
+                  }
+                ],
+                "index": 32,
+                "name": "PSP34"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 25,
+                    "typeName": "psp22::PSP22Error"
+                  }
+                ],
+                "index": 33,
+                "name": "PSP22"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 24,
+                    "typeName": "String"
+                  }
+                ],
+                "index": 34,
+                "name": "Other"
+              }
+            ]
+          }
+        },
+        "path": [
+          "archisinal_lib",
+          "traits",
+          "ArchisinalError"
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "CallerIsNotOwner"
+              },
+              {
+                "index": 1,
+                "name": "NewOwnerIsZero"
+              }
+            ]
+          }
+        },
+        "path": [
+          "openbrush_contracts",
+          "traits",
+          "errors",
+          "ownable",
+          "OwnableError"
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "index": 0,
+                "name": "InvalidCaller"
+              },
+              {
+                "index": 1,
+                "name": "MissingRole"
+              },
+              {
+                "index": 2,
+                "name": "RoleRedundant"
+              }
+            ]
+          }
+        },
+        "path": [
+          "openbrush_contracts",
+          "traits",
+          "errors",
+          "access_control",
+          "AccessControlError"
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 24,
+                    "typeName": "String"
+                  }
+                ],
+                "index": 0,
+                "name": "Custom"
+              },
+              {
+                "index": 1,
+                "name": "SelfApprove"
+              },
+              {
+                "index": 2,
+                "name": "NotApproved"
+              },
+              {
+                "index": 3,
+                "name": "TokenExists"
+              },
+              {
+                "index": 4,
+                "name": "TokenNotExists"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 24,
+                    "typeName": "String"
+                  }
+                ],
+                "index": 5,
+                "name": "SafeTransferCheckFailed"
+              }
+            ]
+          }
+        },
+        "path": [
+          "openbrush_contracts",
+          "traits",
+          "errors",
+          "psp34",
+          "PSP34Error"
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "type": {
+        "def": {
+          "primitive": "str"
+        }
+      }
+    },
+    {
+      "id": 25,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 24,
+                    "typeName": "String"
+                  }
+                ],
+                "index": 0,
+                "name": "Custom"
+              },
+              {
+                "index": 1,
+                "name": "InsufficientBalance"
+              },
+              {
+                "index": 2,
+                "name": "InsufficientAllowance"
+              },
+              {
+                "index": 3,
+                "name": "ZeroRecipientAddress"
+              },
+              {
+                "index": 4,
+                "name": "ZeroSenderAddress"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 24,
+                    "typeName": "String"
+                  }
+                ],
+                "index": 5,
+                "name": "SafeTransferCheckFailed"
+              }
+            ]
+          }
+        },
+        "path": [
+          "openbrush_contracts",
+          "traits",
+          "errors",
+          "psp22",
+          "PSP22Error"
+        ]
+      }
+    },
+    {
+      "id": 26,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
+                    "type": 5
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 10
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 5
           },
           {
             "name": "E",
@@ -3017,6 +2977,48 @@
               {
                 "fields": [
                   {
+                    "type": 28
+                  }
+                ],
+                "index": 0,
+                "name": "Ok"
+              },
+              {
+                "fields": [
+                  {
+                    "type": 10
+                  }
+                ],
+                "index": 1,
+                "name": "Err"
+              }
+            ]
+          }
+        },
+        "params": [
+          {
+            "name": "T",
+            "type": 28
+          },
+          {
+            "name": "E",
+            "type": 10
+          }
+        ],
+        "path": [
+          "Result"
+        ]
+      }
+    },
+    {
+      "id": 28,
+      "type": {
+        "def": {
+          "variant": {
+            "variants": [
+              {
+                "fields": [
+                  {
                     "type": 5
                   }
                 ],
@@ -3026,7 +3028,7 @@
               {
                 "fields": [
                   {
-                    "type": 14
+                    "type": 20
                   }
                 ],
                 "index": 1,
@@ -3042,22 +3044,12 @@
           },
           {
             "name": "E",
-            "type": 14
+            "type": 20
           }
         ],
         "path": [
           "Result"
         ]
-      }
-    },
-    {
-      "id": 28,
-      "type": {
-        "def": {
-          "sequence": {
-            "type": 5
-          }
-        }
       }
     },
     {
@@ -3078,7 +3070,7 @@
               },
               {
                 "name": "token_id",
-                "type": 23,
+                "type": 14,
                 "typeName": "Id"
               },
               {
@@ -3093,7 +3085,7 @@
               },
               {
                 "name": "currency",
-                "type": 24,
+                "type": 15,
                 "typeName": "Currency"
               },
               {
@@ -3215,7 +3207,7 @@
               },
               {
                 "name": "token_id",
-                "type": 23,
+                "type": 14,
                 "typeName": "Id"
               },
               {
@@ -3230,7 +3222,7 @@
               },
               {
                 "name": "currency",
-                "type": 24,
+                "type": 15,
                 "typeName": "Currency"
               },
               {
@@ -3540,7 +3532,7 @@
               {
                 "fields": [
                   {
-                    "type": 15
+                    "type": 21
                   }
                 ],
                 "index": 1,
@@ -3556,7 +3548,7 @@
           },
           {
             "name": "E",
-            "type": 15
+            "type": 21
           }
         ],
         "path": [
@@ -3624,7 +3616,7 @@
               {
                 "fields": [
                   {
-                    "type": 16
+                    "type": 22
                   }
                 ],
                 "index": 1,
@@ -3640,7 +3632,7 @@
           },
           {
             "name": "E",
-            "type": 16
+            "type": 22
           }
         ],
         "path": [
@@ -3803,7 +3795,7 @@
               {
                 "fields": [
                   {
-                    "type": 18,
+                    "type": 24,
                     "typeName": "String"
                   }
                 ],
@@ -3817,7 +3809,7 @@
               {
                 "fields": [
                   {
-                    "type": 15,
+                    "type": 21,
                     "typeName": "OwnableError"
                   }
                 ],
@@ -3827,7 +3819,7 @@
               {
                 "fields": [
                   {
-                    "type": 16,
+                    "type": 22,
                     "typeName": "AccessControlError"
                   }
                 ],

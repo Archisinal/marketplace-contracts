@@ -144,6 +144,8 @@ pub trait MarketplaceImpl:
         let currency = &mut listing.currency;
 
         let price = listing.price;
+        currency.assure_transfer(price)?;
+
         let price_without_fee = apply_fee(&listing.price, listing.royalty)?;
         let fee = price
             .checked_sub(price_without_fee)
@@ -220,8 +222,17 @@ pub trait MarketplaceImpl:
             },
         )?;
 
-        if Self::env().transferred_value() < total_price_native {
-            return Err(ArchisinalError::InsufficientFunds);
+        match Self::env().transferred_value().cmp(&total_price_native) {
+            std::cmp::Ordering::Less => {
+                return Err(ArchisinalError::InsufficientFunds);
+            }
+            std::cmp::Ordering::Greater => {
+                let refund_amount = Self::env().transferred_value() - total_price_native;
+                Self::env()
+                    .transfer(Self::env().caller(), refund_amount)
+                    .map_err(|_| ArchisinalError::TransferNativeError)?;
+            }
+            std::cmp::Ordering::Equal => {}
         }
 
         listings.iter_mut().try_for_each(|listing| {
@@ -232,6 +243,7 @@ pub trait MarketplaceImpl:
 
             let royalty = listing.royalty;
             let price = &listing.price;
+
             let price_without_fee = apply_fee(price, royalty)?;
             let fee = price
                 .checked_sub(price_without_fee)

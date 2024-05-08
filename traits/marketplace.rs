@@ -39,7 +39,7 @@ pub trait Marketplace {
     #[ink(message)]
     fn get_listing_by_index(&self, index: u128) -> Option<Listing>;
 
-    /// List an NFT for sale
+    /// List a NFT for sale
     ///
     /// # Note
     /// This function will transfer the NFT from the caller to the Marketplace contract.
@@ -76,7 +76,7 @@ pub trait Marketplace {
         currency: Currency,
     ) -> ProjectResult<u128>;
 
-    /// List an NFT for auction
+    /// List a NFT for auction
     ///
     /// # Note
     /// This function will transfer the NFT from the Marketplace contract to creator back.
@@ -103,7 +103,7 @@ pub trait Marketplace {
     #[ink(message)]
     fn cancel_listing(&mut self, listing_id: u128) -> ProjectResult<()>;
 
-    /// Buy an NFT
+    /// Buy a NFT
     ///
     /// # Note
     /// This function will transfer the NFT from the Marketplace contract to the buyer.

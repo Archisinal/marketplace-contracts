@@ -10,6 +10,8 @@ import { expect } from './chai'
 import { Signers } from './signers'
 import { AuctionInfo } from "../../typechain-generated/types-arguments/marketplace";
 import {COLLECTION_ROYALTY} from "./test-setups/creator";
+import ApiSingleton from './api_singleton'
+import BN from 'bn.js'
 
 export async function mintAndList(
   contract: MarketplaceContract,
@@ -129,4 +131,14 @@ export async function mintAndListAuction(
   await expect(contract.query.getAuctionCount()).to.have.returnNumber(indexBefore + 1)
 
   return { START_TIME, END_TIME }
+}
+
+export async function getBalance(signer: KeyringPair) {
+  const api = await ApiSingleton.getInstance()
+
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const { data: balance } = await api.query.system.account(signer.address)
+
+  return balance.free as BN
 }

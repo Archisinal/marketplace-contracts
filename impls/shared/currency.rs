@@ -125,17 +125,16 @@ impl Currency {
     /// since the PSP22 contract will handle the transfer checks.
     pub fn assure_transfer(&self, amount: u128) -> ProjectResult<()> {
         match self {
-            Currency::Native => {
-                if Self::env().transferred_value() == amount {
-                    Ok(())
-                } else if Self::env().transferred_value() > amount {
+            Currency::Native => match Self::env().transferred_value().cmp(&amount) {
+                std::cmp::Ordering::Less => Err(ArchisinalError::TransferNativeError),
+                std::cmp::Ordering::Greater => {
                     let refund_amount = Self::env().transferred_value() - amount;
-                    Self::env().transfer(Self::env().caller(), refund_amount)
+                    Self::env()
+                        .transfer(Self::env().caller(), refund_amount)
                         .map_err(|_| ArchisinalError::TransferNativeError)
-                } else {
-                    Err(ArchisinalError::TransferNativeError)
                 }
-            }
+                std::cmp::Ordering::Equal => Ok(()),
+            },
             Currency::Custom(_) => Ok(()),
         }
     }
@@ -181,13 +180,9 @@ impl Currency {
         amount: u128,
     ) -> ProjectResult<()> {
         match self {
-            Currency::Native => {
-                self.assure_transfer(amount)?;
-
-                Self::env()
-                    .transfer(to, amount)
-                    .map_err(|_| ArchisinalError::TransferNativeError)
-            }
+            Currency::Native => Self::env()
+                .transfer(to, amount)
+                .map_err(|_| ArchisinalError::TransferNativeError),
             Currency::Custom(address) => PSP22Ref::transfer_from(address, from, to, amount, vec![])
                 .map_err(ArchisinalError::PSP22),
         }

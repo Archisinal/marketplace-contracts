@@ -2,7 +2,7 @@
 import { KeyringPair } from '@polkadot/keyring/types'
 import { after, describe } from 'mocha'
 
-import { CurrencyBuilder } from '../../typechain-generated/types-arguments/marketplace'
+import { CurrencyBuilder, IdBuilder } from '../../typechain-generated/types-arguments/marketplace'
 import { ListingStatus } from '../../typechain-generated/types-returns/marketplace'
 import ApiSingleton from '../shared/api_singleton'
 import { expect } from '../shared/chai'
@@ -75,7 +75,7 @@ describe(SECURITY_PREFIX + 'Marketplace', () => {
   })
 
   describe('Native currency', () => {
-    it('Cannot Buy an NFT from a listing with a lower price than the listing.', async () => {
+    it('Cannot Buy a NFT from a listing with a lower price than the listing.', async () => {
       const contract = await setup()
       const nft = await setupArchNFT()
       const psp22 = await setupPSP22()
@@ -127,6 +127,16 @@ describe(SECURITY_PREFIX + 'Marketplace', () => {
     })
   })
 
+  it('Cannot list NFT with a price of 0.', async () => {
+    const contract = await setup()
+    const nft = await setupArchNFT()
+    const psp22 = await setupPSP22()
+
+    await expect(mintAndList(contract, nft, psp22, TOKEN_ID, 0)).to.eventually.be.rejected
+
+    await expect(contract.query.getListingCount()).to.have.returnNumber(0)
+  })
+
   it('Cannot buy an cancelled NFT from a listing.', async () => {
     const contract = await setup()
     const nft = await setupArchNFT()
@@ -169,6 +179,26 @@ describe(SECURITY_PREFIX + 'Marketplace', () => {
     })
 
     await expect(nft.query.ownerOf(TOKEN_ID)).to.have.returnValue(bob.address)
+  })
+
+
+  it('only owner of the NFT can make a listing', async () => {
+    const contract = await setup()
+    const nft = await setupArchNFT()
+    const psp22 = await setupPSP22()
+    const bob = Signers.Bob
+    const tokenId = IdBuilder.U8(1)
+    const price = 100
+
+    await expect(nft.tx.mint(bob.address, tokenId)).to.eventually.be.fulfilled
+
+    await expect(nft.withSigner(bob).tx.approve(contract.address, tokenId, true)).to.eventually.be.fulfilled
+
+    await expect(
+      contract
+        .withSigner(Signers.Alice)
+        .tx.listNftForSale(bob.address, nft.address, tokenId, price, CurrencyBuilder.Custom(psp22.address)),
+    ).to.eventually.be.rejected
   })
 
   after(async () => {
