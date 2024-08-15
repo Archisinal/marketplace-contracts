@@ -321,7 +321,7 @@ mod marketplace {
             AuctionImpl::cancel_auction(self, auction_id)
         }
 
-        #[ink(message)]
+        #[ink(message, payable)]
         fn bid_nft(&mut self, auction_id: u128, price: u128) -> ProjectResult<()> {
             AuctionImpl::bid_nft(self, auction_id, price)
         }

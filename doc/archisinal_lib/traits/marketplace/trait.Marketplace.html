@@ -38,7 +38,7 @@
     token_id: Id,
     price: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>,
     currency: <a class="enum" href="../../impls/shared/currency/enum.Currency.html" title="enum archisinal_lib::impls::shared::currency::Currency">Currency</a>
-) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>&gt;</h4></section></summary><div class="docblock"><p>List an NFT for sale</p>
+) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>&gt;</h4></section></summary><div class="docblock"><p>List a NFT for sale</p>
 <h5 id="note-2"><a href="#note-2">Note</a></h5>
 <p>This function will transfer the NFT from the caller to the Marketplace contract.
 Sets the listing state to <code>OnSale</code></p>
@@ -65,7 +65,7 @@ Sets the listing state to <code>OnSale</code></p>
 <ul>
 <li><code>ListNFT</code> - If the listing was created successfully</li>
 </ul>
-</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.cancel_listing" class="method"><a class="srclink rightside" href="../../../src/archisinal_lib/traits/marketplace.rs.html#100">source</a><h4 class="code-header">fn <a href="#tymethod.cancel_listing" class="fn">cancel_listing</a>(&amp;mut self, listing_id: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.unit.html">()</a>&gt;</h4></section></summary><div class="docblock"><p>List an NFT for auction</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.cancel_listing" class="method"><a class="srclink rightside" href="../../../src/archisinal_lib/traits/marketplace.rs.html#100">source</a><h4 class="code-header">fn <a href="#tymethod.cancel_listing" class="fn">cancel_listing</a>(&amp;mut self, listing_id: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.unit.html">()</a>&gt;</h4></section></summary><div class="docblock"><p>List a NFT for auction</p>
 <h5 id="note-3"><a href="#note-3">Note</a></h5>
 <p>This function will transfer the NFT from the Marketplace contract to creator back.
 The listing should be in <code>OnSale</code> state.</p>
@@ -88,7 +88,7 @@ The listing should be in <code>OnSale</code> state.</p>
 <ul>
 <li><code>CancelListing</code> - If the listing was cancelled successfully</li>
 </ul>
-</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.buy_nft" class="method"><a class="srclink rightside" href="../../../src/archisinal_lib/traits/marketplace.rs.html#129">source</a><h4 class="code-header">fn <a href="#tymethod.buy_nft" class="fn">buy_nft</a>(&amp;mut self, listing_id: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.unit.html">()</a>&gt;</h4></section></summary><div class="docblock"><p>Buy an NFT</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.buy_nft" class="method"><a class="srclink rightside" href="../../../src/archisinal_lib/traits/marketplace.rs.html#129">source</a><h4 class="code-header">fn <a href="#tymethod.buy_nft" class="fn">buy_nft</a>(&amp;mut self, listing_id: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.unit.html">()</a>&gt;</h4></section></summary><div class="docblock"><p>Buy a NFT</p>
 <h5 id="note-4"><a href="#note-4">Note</a></h5>
 <p>This function will transfer the NFT from the Marketplace contract to the buyer.</p>
 <h5 id="arguments-3"><a href="#arguments-3">Arguments</a></h5>

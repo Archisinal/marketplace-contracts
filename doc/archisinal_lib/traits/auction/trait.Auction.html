@@ -49,7 +49,7 @@
     currency: <a class="enum" href="../../impls/shared/currency/enum.Currency.html" title="enum archisinal_lib::impls::shared::currency::Currency">Currency</a>,
     start_time: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u64.html">u64</a>,
     end_time: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u64.html">u64</a>
-) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>&gt;</h4></section></summary><div class="docblock"><p>List an NFT for auction</p>
+) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>&gt;</h4></section></summary><div class="docblock"><p>List a NFT for auction</p>
 <h5 id="note-3"><a href="#note-3">Note</a></h5>
 <p>This function will transfer the NFT from the caller to the Auction contract.
 Sets the auction state to <code>WaitingAuction</code>. Needs to be started by the owner of the NFT.</p>
@@ -158,7 +158,7 @@ Should be in the <code>InAuction</code> state.</p>
 <ul>
 <li><code>BidPlaced</code> - If the bid was successful</li>
 </ul>
-</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.claim_nft" class="method"><a class="srclink rightside" href="../../../src/archisinal_lib/traits/auction.rs.html#208">source</a><h4 class="code-header">fn <a href="#tymethod.claim_nft" class="fn">claim_nft</a>(&amp;mut self, auction_id: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.unit.html">()</a>&gt;</h4></section></summary><div class="docblock"><p>Claim an NFT from an auction</p>
+</div></details><details class="toggle method-toggle" open><summary><section id="tymethod.claim_nft" class="method"><a class="srclink rightside" href="../../../src/archisinal_lib/traits/auction.rs.html#208">source</a><h4 class="code-header">fn <a href="#tymethod.claim_nft" class="fn">claim_nft</a>(&amp;mut self, auction_id: <a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.u128.html">u128</a>) -&gt; <a class="type" href="../type.ProjectResult.html" title="type archisinal_lib::traits::ProjectResult">ProjectResult</a>&lt;<a class="primitive" href="https://doc.rust-lang.org/1.71.0/std/primitive.unit.html">()</a>&gt;</h4></section></summary><div class="docblock"><p>Claim a NFT from an auction</p>
 <h5 id="note-7"><a href="#note-7">Note</a></h5>
 <p>Should be in the <code>InAuction</code> state, but current time is greater than the end time.
 If successful, the NFT will be transferred to the highest bidder and listing will be switched to <code>Ended</code> state.</p>

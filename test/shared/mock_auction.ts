@@ -66,6 +66,22 @@ export async function mintAndListAuction(
                 } as AuctionInfo
             )
         ).to.eventually.be.fulfilled
+
+        await expect(contract.query.getAuctionByIndex(indexBefore)).to.be.deepReturnValue({
+          id: indexBefore,
+          creator: Signers.Bob.address,
+          collection: nft.address,
+          tokenId: tokenId,
+          startPrice: price,
+          minBidStep: minBidStep,
+          currency: CurrencyBuilder.Custom(psp22.address),
+          startTime: START_TIME,
+          endTime: END_TIME,
+          currentPrice: 0,
+          currentBidder: null,
+          status: AuctionStatus.waitingAuction,
+          royalty: COLLECTION_ROYALTY,
+        })
     } else {
         await expect(
             contract
@@ -83,23 +99,23 @@ export async function mintAndListAuction(
                 }
             ),
         ).to.eventually.be.fulfilled
-    }
 
-    await expect(contract.query.getAuctionByIndex(indexBefore)).to.be.deepReturnValue({
-        id: indexBefore,
-        creator: Signers.Bob.address,
-        collection: nft.address,
-        tokenId: tokenId,
-        startPrice: price,
-        minBidStep: minBidStep,
-        currency: CurrencyBuilder.Custom(psp22.address),
-        startTime: START_TIME,
-        endTime: END_TIME,
-        currentPrice: 0,
-        currentBidder: null,
-        status: AuctionStatus.waitingAuction,
-        royalty: COLLECTION_ROYALTY,
-    })
+        await expect(contract.query.getAuctionByIndex(indexBefore)).to.be.deepReturnValue({
+          id: indexBefore,
+          creator: Signers.Bob.address,
+          collection: nft.address,
+          tokenId: tokenId,
+          startPrice: price,
+          minBidStep: minBidStep,
+          currency: CurrencyBuilder.Native(),
+          startTime: START_TIME,
+          endTime: END_TIME,
+          currentPrice: 0,
+          currentBidder: null,
+          status: AuctionStatus.waitingAuction,
+          royalty: COLLECTION_ROYALTY,
+        })
+    }
 
     await expect(contract.query.getAuctionCount()).to.have.returnNumber(indexBefore + 1)
 

@@ -6,7 +6,7 @@ pub use crate::creator::*;
 ///
 /// The creator contract is responsible for creating collections,
 /// and managing the creator metadata. Designed to be extensible in the future.
-#[openbrush::implementation(Ownable, Upgradeable)]
+#[openbrush::implementation(Upgradeable)]
 #[openbrush::contract]
 mod creator {
 
@@ -66,6 +66,35 @@ mod creator {
             UserImpl::set_user_data(&mut instance, data).unwrap();
 
             instance
+        }
+    }
+
+    impl ownable::InternalImpl for Contract {}
+
+    impl ownable::Internal for Contract {
+        fn _emit_ownership_transferred_event(&self, _previous: Option<AccountId>, _new: Option<AccountId>) {}
+
+        fn _init_with_owner(&mut self, owner: AccountId) {
+            ownable::InternalImpl::_init_with_owner(self, owner)
+        }
+    }
+
+    impl OwnableImpl for Contract {}
+
+    impl Ownable for Contract {
+        #[ink(message)]
+        fn owner(&self) -> Option<AccountId> {
+            OwnableImpl::owner(self)
+        }
+
+        #[ink(message)]
+        fn renounce_ownership(&mut self) -> Result<(), OwnableError> {
+            panic!("Renounce ownership is not allowed for this contract")
+        }
+
+        #[ink(message)]
+        fn transfer_ownership(&mut self, _new_owner: AccountId) -> Result<(), OwnableError> {
+            panic!("Transfer ownership is not allowed for this contract")
         }
     }
 

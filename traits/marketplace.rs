@@ -39,7 +39,7 @@ pub trait Marketplace {
     #[ink(message)]
     fn get_listing_by_index(&self, index: u128) -> Option<Listing>;
 
-    /// List an NFT for sale
+    /// List a NFT for sale
     ///
     /// # Note
     /// This function will transfer the NFT from the caller to the Marketplace contract.
@@ -59,7 +59,6 @@ pub trait Marketplace {
     ///
     /// # Errors
     ///
-    /// * `ArchisinalError::CreatorIsNotCaller` - If the creator is not the caller
     /// * `ArchisinalError::CallerIsNotNFTOwner` - If the caller is not the owner of the NFT
     /// * `ArchisinalError::PSP34Error(...)` - If the PSP34 contract returns an error
     /// * `ArchisinalError::IntegerOverflow` - If an integer overflow occurs
@@ -77,7 +76,7 @@ pub trait Marketplace {
         currency: Currency,
     ) -> ProjectResult<u128>;
 
-    /// List an NFT for auction
+    /// List a NFT for auction
     ///
     /// # Note
     /// This function will transfer the NFT from the Marketplace contract to creator back.
@@ -104,7 +103,7 @@ pub trait Marketplace {
     #[ink(message)]
     fn cancel_listing(&mut self, listing_id: u128) -> ProjectResult<()>;
 
-    /// Buy an NFT
+    /// Buy a NFT
     ///
     /// # Note
     /// This function will transfer the NFT from the Marketplace contract to the buyer.

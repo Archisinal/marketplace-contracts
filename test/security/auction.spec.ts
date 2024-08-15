@@ -13,6 +13,8 @@ import { Signers } from '../shared/signers'
 import { setupArchNFT } from '../shared/test-setups/arch_nft'
 import { setupMockAuction as setup } from '../shared/test-setups/mock_auction'
 import { setupPSP22 } from '../shared/test-setups/my_psp22'
+import { getBalance } from '../shared/marketplace'
+import BN from 'bn.js'
 
 describe(SECURITY_PREFIX + 'Auction', () => {
   let contract: MockAuctionContract
@@ -163,6 +165,24 @@ describe(SECURITY_PREFIX + 'Auction', () => {
 
       await expect(contract.withSigner(Signers.Charlie).tx.bidNft(0, 101)).to.eventually.be.rejected
     })
+
+    it('should return previous bid if there is a new bid (native funds)', async () => {
+      await mintAndListAuction(contract, nft, psp22, TOKEN_ID_1, 100, 1, true)
+
+      await contract.tx.addTimestamp(3010)
+
+      await expect(contract.withSigner(Signers.Bob).tx.startAuction(0)).to.eventually.be.fulfilled
+
+      await expect(contract.withSigner(Signers.Charlie).tx.bidNft(0, 100, { value: 100 })).to.eventually.be.fulfilled
+
+      const balanceBefore = await getBalance(Signers.Charlie);
+
+      await expect(contract.withSigner(Signers.Alice).tx.bidNft(0, 101, { value: 101 })).to.eventually.be.fulfilled
+
+      const balanceAfter = await getBalance(Signers.Charlie);
+
+      expect(balanceAfter.toString()).to.be.equal(balanceBefore.add(new BN(100)).toString())
+    })
   })
 
   describe('Claim NFT', () => {
@@ -184,6 +204,22 @@ describe(SECURITY_PREFIX + 'Auction', () => {
       await expect(contract.withSigner(Signers.Bob).tx.startAuction(0)).to.eventually.be.fulfilled
 
       await expect(contract.withSigner(Signers.Alice).tx.claimNft(0)).to.eventually.be.rejected
+    })
+
+    it('should return NFT to the creator if no one bids', async () => {
+      await mintAndListAuction(contract, nft, psp22, TOKEN_ID_1, 100, 1, false, 300, 100)
+
+      await contract.tx.addTimestamp(310)
+
+      await expect(contract.withSigner(Signers.Bob).tx.startAuction(0)).to.eventually.be.fulfilled
+
+      await expect(nft.withSigner(Signers.Bob).query.ownerOf(TOKEN_ID_1)).to.have.returnValue(contract.address)
+
+      await contract.tx.addTimestamp(610)
+
+      await expect(contract.withSigner(Signers.Bob).tx.claimNft(0)).to.eventually.be.fulfilled
+
+      await expect(nft.withSigner(Signers.Bob).query.ownerOf(TOKEN_ID_1)).to.have.returnValue(Signers.Bob.address)
     })
   })
 })

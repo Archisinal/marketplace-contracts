@@ -20,7 +20,7 @@ describe(SECURITY_PREFIX + 'Arch NFT', () => {
     await expect(contract.query.collectionAdditionalInfo()).to.have.returnValue(ADDITIONAL_INFO)
   })
 
-  it('Cannot set royalty more than 10000', async () => {
+  it('Cannot deploy with royalty more than 10000', async () => {
     const api = await ApiSingleton.getInstance()
 
     const defaultSigner = Signers.defaultSigner
@@ -28,6 +28,8 @@ describe(SECURITY_PREFIX + 'Arch NFT', () => {
     const constructors = new Constructors(api, defaultSigner)
 
     await expect(constructors.new(10001, COLLECTION_NAME, COLLECTION_URI, ADDITIONAL_INFO)).to.eventually.be.rejected
+
+    await expect(constructors.newDefault(defaultSigner.address, 10000, COLLECTION_NAME, COLLECTION_URI, ADDITIONAL_INFO)).to.eventually.be.fulfilled
   })
 
   it('Cannot mint NFT if not owner', async () => {

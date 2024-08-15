@@ -48,9 +48,14 @@ pub trait MarketplaceImpl:
         currency: Currency,
     ) -> ProjectResult<u128> {
         let contract_address: AccountId = <Self as DefaultEnv>::env().account_id();
+        let caller = <Self as DefaultEnv>::env().caller();
 
-        if PSP34Ref::owner_of(&collection, token_id.clone()) != Some(creator) {
+        if PSP34Ref::owner_of(&collection, token_id.clone()) != Some(creator) || creator != caller {
             return Err(ArchisinalError::CallerIsNotNFTOwner);
+        }
+
+        if price == 0 {
+            return Err(ArchisinalError::ListingPriceIsZero);
         }
 
         self.check_collection(collection)?;
@@ -139,13 +144,12 @@ pub trait MarketplaceImpl:
         let currency = &mut listing.currency;
 
         let price = listing.price;
+        currency.assure_transfer(price)?;
+
         let price_without_fee = apply_fee(&listing.price, listing.royalty)?;
         let fee = price
             .checked_sub(price_without_fee)
             .ok_or(ArchisinalError::IntegerUnderflow)?;
-
-        // Check if the caller has enough balance to buy the NFT (in case of Native)
-        currency.assure_transfer(price)?;
 
         PSP34Ref::transfer(
             &listing.collection,
@@ -156,11 +160,9 @@ pub trait MarketplaceImpl:
 
         currency.transfer_from(caller, listing.creator, price_without_fee)?;
 
-        let collection_owner = OwnableRef::owner(&listing.collection);
+        let collection_owner = OwnableRef::owner(&listing.collection).unwrap_or(listing.creator);
 
-        if let Some(collection_owner) = collection_owner {
-            currency.transfer_from(caller, collection_owner, fee)?;
-        }
+        currency.transfer_from(caller, collection_owner, fee)?;
 
         self.data::<Data>().listings.insert(
             &listing_id,
@@ -175,45 +177,62 @@ pub trait MarketplaceImpl:
         Ok(())
     }
 
-    fn buy_batch(&mut self, ids: Vec<u128>) -> ProjectResult<()> {
+    fn buy_batch(&mut self, mut ids: Vec<u128>) -> ProjectResult<()> {
         let caller = <Self as DefaultEnv>::env().caller();
 
-        let mut listings = ids.into_iter().try_fold(Vec::new(), |mut acc, id| {
-            let listing = self
-                .data::<Data>()
-                .listings
-                .get(&id)
-                .ok_or(ArchisinalError::ListingNotFound)?;
-
-            if listing.status != ListingStatus::OnSale {
-                return Err(ArchisinalError::ListingNotOnSale);
+        ids.sort();
+        let mut new_ids = Vec::new();
+        for id in ids {
+            if let Some(last) = new_ids.last() {
+                if *last != id {
+                    new_ids.push(id);
+                }
+            } else {
+                new_ids.push(id);
             }
+        }
+        let ids = new_ids;
 
-            if caller == listing.creator {
-                return Err(ArchisinalError::CallerIsListingOwner);
+        let (mut listings, total_price_native) = ids.into_iter().try_fold(
+            (Vec::new(), 0),
+            |(mut acc_listings, mut acc_total_price_native), id| {
+                let listing = self
+                    .data::<Data>()
+                    .listings
+                    .get(&id)
+                    .ok_or(ArchisinalError::ListingNotFound)?;
+
+                if listing.status != ListingStatus::OnSale {
+                    return Err(ArchisinalError::ListingNotOnSale);
+                }
+
+                if caller == listing.creator {
+                    return Err(ArchisinalError::CallerIsListingOwner);
+                }
+
+                acc_total_price_native += if listing.currency.is_native() {
+                    listing.price
+                } else {
+                    0
+                };
+
+                acc_listings.push(listing);
+
+                Ok((acc_listings, acc_total_price_native))
+            },
+        )?;
+
+        match Self::env().transferred_value().cmp(&total_price_native) {
+            std::cmp::Ordering::Less => {
+                return Err(ArchisinalError::InsufficientFunds);
             }
-
-            acc.push(listing);
-
-            Ok(acc)
-        })?;
-
-        let total_price_native =
-            listings
-                .clone()
-                .into_iter()
-                .try_fold(0u128, |mut acc, listing| {
-                    acc += if listing.currency.is_native() {
-                        listing.price
-                    } else {
-                        0
-                    };
-
-                    Ok::<u128, ArchisinalError>(acc)
-                })?;
-
-        if Self::env().transferred_value() < total_price_native {
-            return Err(ArchisinalError::InsufficientFunds);
+            std::cmp::Ordering::Greater => {
+                let refund_amount = Self::env().transferred_value() - total_price_native;
+                Self::env()
+                    .transfer(Self::env().caller(), refund_amount)
+                    .map_err(|_| ArchisinalError::TransferNativeError)?;
+            }
+            std::cmp::Ordering::Equal => {}
         }
 
         listings.iter_mut().try_for_each(|listing| {
@@ -224,6 +243,7 @@ pub trait MarketplaceImpl:
 
             let royalty = listing.royalty;
             let price = &listing.price;
+
             let price_without_fee = apply_fee(price, royalty)?;
             let fee = price
                 .checked_sub(price_without_fee)

@@ -41,7 +41,7 @@ pub trait Auction {
     #[ink(message)]
     fn get_auction_by_index(&self, index: u128) -> Option<data::Auction>;
 
-    /// List an NFT for auction
+    /// List a NFT for auction
     ///
     /// # Note
     /// This function will transfer the NFT from the caller to the Auction contract.
@@ -154,7 +154,6 @@ pub trait Auction {
     /// # Errors
     ///
     /// * `ArchisinalError::AuctionNotFound` - The auction was not found
-    /// * `ArchisinalError::CallerIsAuctionOwner` - The caller is the creator of the auction
     /// * `ArchisinalError::AuctionNotInAuction` - The auction is not in the auction state, so it cannot be bid on
     /// * `ArchisinalError::BidPriceTooLow` - The bid amount is too low
     /// * `ArchisinalError::AuctionNotStarted` - The bid amount is too high
@@ -168,7 +167,7 @@ pub trait Auction {
     #[ink(message, payable)]
     fn bid_nft(&mut self, auction_id: u128, price: u128) -> ProjectResult<()>;
 
-    /// Claim an NFT from an auction
+    /// Claim a NFT from an auction
     ///
     /// # Note
     ///

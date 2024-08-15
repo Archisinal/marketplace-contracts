@@ -44,7 +44,7 @@ pub trait AdminAccessImpl:
         let caller = Self::env().caller();
 
         // Check if the caller is an admin or the owner
-        if !self.is_admin(caller) || self.owner() != Some(caller) {
+        if !self.is_admin(caller) && self.owner() != Some(caller) {
             return Err(ArchisinalError::AdminAccessError);
         }
 

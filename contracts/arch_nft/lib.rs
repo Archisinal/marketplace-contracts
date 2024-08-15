@@ -127,6 +127,10 @@ mod arch_nft {
             let mut instance = Self::default();
             let caller = Self::env().caller();
 
+            if royalty > 10000 {
+                panic!("Royalty must be less than or equal to 10000");
+            }
+
             ownable::Internal::_init_with_owner(&mut instance, caller);
 
             CollectionImpl::set_collection_royalty(&mut instance, royalty).unwrap();
@@ -146,11 +150,6 @@ mod arch_nft {
             ownable::Internal::_init_with_owner(&mut instance, owner);
 
             instance
-        }
-
-        #[ink(message)]
-        pub fn account_id(&self) -> AccountId {
-            Self::env().account_id()
         }
     }
 
