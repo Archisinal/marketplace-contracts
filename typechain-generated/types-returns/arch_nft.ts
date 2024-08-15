@@ -7,6 +7,56 @@ export enum LangError {
 	couldNotReadInput = 'CouldNotReadInput'
 }
 
+export interface Id {
+	u8 ? : number,
+	u16 ? : number,
+	u32 ? : number,
+	u64 ? : number,
+	u128 ? : ReturnNumber,
+	bytes ? : Array<number>
+}
+
+export class IdBuilder {
+	static U8(value: number): Id {
+		return {
+			u8: value,
+		};
+	}
+	static U16(value: number): Id {
+		return {
+			u16: value,
+		};
+	}
+	static U32(value: number): Id {
+		return {
+			u32: value,
+		};
+	}
+	static U64(value: number): Id {
+		return {
+			u64: value,
+		};
+	}
+	static U128(value: ReturnNumber): Id {
+		return {
+			u128: value,
+		};
+	}
+	static Bytes(value: Array<number>): Id {
+		return {
+			bytes: value,
+		};
+	}
+}
+
+export type NftMetadata = {
+	name: string,
+	description: string,
+	image: string,
+	externalUrl: string,
+	categories: Array<string>
+}
+
 export interface ArchisinalError {
 	noOwner ? : null,
 	adminAccessError ? : null,
@@ -328,56 +378,6 @@ export class PSP22ErrorBuilder {
 			safeTransferCheckFailed: value,
 		};
 	}
-}
-
-export interface Id {
-	u8 ? : number,
-	u16 ? : number,
-	u32 ? : number,
-	u64 ? : number,
-	u128 ? : ReturnNumber,
-	bytes ? : Array<number>
-}
-
-export class IdBuilder {
-	static U8(value: number): Id {
-		return {
-			u8: value,
-		};
-	}
-	static U16(value: number): Id {
-		return {
-			u16: value,
-		};
-	}
-	static U32(value: number): Id {
-		return {
-			u32: value,
-		};
-	}
-	static U64(value: number): Id {
-		return {
-			u64: value,
-		};
-	}
-	static U128(value: ReturnNumber): Id {
-		return {
-			u128: value,
-		};
-	}
-	static Bytes(value: Array<number>): Id {
-		return {
-			bytes: value,
-		};
-	}
-}
-
-export type NftMetadata = {
-	name: string,
-	description: string,
-	image: string,
-	externalUrl: string,
-	categories: Array<string>
 }
 
 export type Hash = string | number[]

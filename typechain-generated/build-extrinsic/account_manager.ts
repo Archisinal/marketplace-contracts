@@ -21,6 +21,16 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
+	 * getCreatorCodeHash
+	 *
+	*/
+	"getCreatorCodeHash" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accountManager::getCreatorCodeHash", [], __options);
+	}
+
+	/**
 	 * getUserCodeHash
 	 *
 	*/
@@ -28,6 +38,16 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accountManager::getUserCodeHash", [], __options);
+	}
+
+	/**
+	 * createCreatorAccount
+	 *
+	*/
+	"createCreatorAccount" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accountManager::createCreatorAccount", [], __options);
 	}
 
 	/**
@@ -53,28 +73,6 @@ export default class Methods {
 	}
 
 	/**
-	 * setUserCodeHash
-	 *
-	 * @param { ArgumentTypes.Hash } codeHash,
-	*/
-	"setUserCodeHash" (
-		codeHash: ArgumentTypes.Hash,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accountManager::setUserCodeHash", [codeHash], __options);
-	}
-
-	/**
-	 * createCreatorAccount
-	 *
-	*/
-	"createCreatorAccount" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accountManager::createCreatorAccount", [], __options);
-	}
-
-	/**
 	 * getCreatorAccount
 	 *
 	 * @param { ArgumentTypes.AccountId } accountId,
@@ -84,16 +82,6 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accountManager::getCreatorAccount", [accountId], __options);
-	}
-
-	/**
-	 * getCreatorCodeHash
-	 *
-	*/
-	"getCreatorCodeHash" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accountManager::getCreatorCodeHash", [], __options);
 	}
 
 	/**
@@ -109,15 +97,15 @@ export default class Methods {
 	}
 
 	/**
-	 * removeAdmin
+	 * setUserCodeHash
 	 *
-	 * @param { ArgumentTypes.AccountId } accountId,
+	 * @param { ArgumentTypes.Hash } codeHash,
 	*/
-	"removeAdmin" (
-		accountId: ArgumentTypes.AccountId,
+	"setUserCodeHash" (
+		codeHash: ArgumentTypes.Hash,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::removeAdmin", [accountId], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accountManager::setUserCodeHash", [codeHash], __options);
 	}
 
 	/**
@@ -145,6 +133,28 @@ export default class Methods {
 	}
 
 	/**
+	 * removeAdmin
+	 *
+	 * @param { ArgumentTypes.AccountId } accountId,
+	*/
+	"removeAdmin" (
+		accountId: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::removeAdmin", [accountId], __options);
+	}
+
+	/**
+	 * renounceOwnership
+	 *
+	*/
+	"renounceOwnership" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::renounceOwnership", [], __options);
+	}
+
+	/**
 	 * transferOwnership
 	 *
 	 * @param { ArgumentTypes.AccountId } newOwner,
@@ -164,16 +174,6 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::owner", [], __options);
-	}
-
-	/**
-	 * renounceOwnership
-	 *
-	*/
-	"renounceOwnership" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::renounceOwnership", [], __options);
 	}
 
 	/**

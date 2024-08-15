@@ -21,6 +21,52 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
+	 * isWhitelistEnabled
+	 *
+	*/
+	"isWhitelistEnabled" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::isWhitelistEnabled", [], __options);
+	}
+
+	/**
+	 * isBanned
+	 *
+	 * @param { ArgumentTypes.AccountId } collection,
+	*/
+	"isBanned" (
+		collection: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::isBanned", [collection], __options);
+	}
+
+	/**
+	 * isWhitelisted
+	 *
+	 * @param { ArgumentTypes.AccountId } collection,
+	*/
+	"isWhitelisted" (
+		collection: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::isWhitelisted", [collection], __options);
+	}
+
+	/**
+	 * whitelistCollection
+	 *
+	 * @param { ArgumentTypes.AccountId } collection,
+	*/
+	"whitelistCollection" (
+		collection: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::whitelistCollection", [collection], __options);
+	}
+
+	/**
 	 * collection
 	 *
 	 * @param { (string | number | BN) } index,
@@ -30,6 +76,30 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::collection", [index], __options);
+	}
+
+	/**
+	 * banCollection
+	 *
+	 * @param { ArgumentTypes.AccountId } collection,
+	*/
+	"banCollection" (
+		collection: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::banCollection", [collection], __options);
+	}
+
+	/**
+	 * isCodehashBanned
+	 *
+	 * @param { ArgumentTypes.Hash } codeHash,
+	*/
+	"isCodehashBanned" (
+		codeHash: ArgumentTypes.Hash,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::isCodehashBanned", [codeHash], __options);
 	}
 
 	/**
@@ -57,20 +127,6 @@ export default class Methods {
 	}
 
 	/**
-	 * instantiateCollection
-	 *
-	 * @param { ArgumentTypes.CollectionInfo } collectionInfo,
-	 * @param { ArgumentTypes.Hash } codeHash,
-	*/
-	"instantiateCollection" (
-		collectionInfo: ArgumentTypes.CollectionInfo,
-		codeHash: ArgumentTypes.Hash,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::instantiateCollection", [collectionInfo, codeHash], __options);
-	}
-
-	/**
 	 * setWhitelistEnabled
 	 *
 	 * @param { boolean } enabled,
@@ -83,71 +139,17 @@ export default class Methods {
 	}
 
 	/**
-	 * isWhitelisted
+	 * instantiateCollection
 	 *
-	 * @param { ArgumentTypes.AccountId } collection,
-	*/
-	"isWhitelisted" (
-		collection: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::isWhitelisted", [collection], __options);
-	}
-
-	/**
-	 * collectionCount
-	 *
-	*/
-	"collectionCount" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::collectionCount", [], __options);
-	}
-
-	/**
-	 * banCollection
-	 *
-	 * @param { ArgumentTypes.AccountId } collection,
-	*/
-	"banCollection" (
-		collection: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::banCollection", [collection], __options);
-	}
-
-	/**
-	 * isBanned
-	 *
-	 * @param { ArgumentTypes.AccountId } collection,
-	*/
-	"isBanned" (
-		collection: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::isBanned", [collection], __options);
-	}
-
-	/**
-	 * isWhitelistEnabled
-	 *
-	*/
-	"isWhitelistEnabled" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::isWhitelistEnabled", [], __options);
-	}
-
-	/**
-	 * isCodehashBanned
-	 *
+	 * @param { ArgumentTypes.CollectionInfo } collectionInfo,
 	 * @param { ArgumentTypes.Hash } codeHash,
 	*/
-	"isCodehashBanned" (
+	"instantiateCollection" (
+		collectionInfo: ArgumentTypes.CollectionInfo,
 		codeHash: ArgumentTypes.Hash,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::isCodehashBanned", [codeHash], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::instantiateCollection", [collectionInfo, codeHash], __options);
 	}
 
 	/**
@@ -163,18 +165,6 @@ export default class Methods {
 	}
 
 	/**
-	 * whitelistCollection
-	 *
-	 * @param { ArgumentTypes.AccountId } collection,
-	*/
-	"whitelistCollection" (
-		collection: ArgumentTypes.AccountId,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::whitelistCollection", [collection], __options);
-	}
-
-	/**
 	 * unbanCollection
 	 *
 	 * @param { ArgumentTypes.AccountId } collection,
@@ -187,15 +177,25 @@ export default class Methods {
 	}
 
 	/**
-	 * isAdmin
+	 * collectionCount
+	 *
+	*/
+	"collectionCount" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "collectionFabric::collectionCount", [], __options);
+	}
+
+	/**
+	 * addAdmin
 	 *
 	 * @param { ArgumentTypes.AccountId } accountId,
 	*/
-	"isAdmin" (
+	"addAdmin" (
 		accountId: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::isAdmin", [accountId], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::addAdmin", [accountId], __options);
 	}
 
 	/**
@@ -211,15 +211,27 @@ export default class Methods {
 	}
 
 	/**
-	 * addAdmin
+	 * isAdmin
 	 *
 	 * @param { ArgumentTypes.AccountId } accountId,
 	*/
-	"addAdmin" (
+	"isAdmin" (
 		accountId: ArgumentTypes.AccountId,
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::addAdmin", [accountId], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "adminAccess::isAdmin", [accountId], __options);
+	}
+
+	/**
+	 * transferOwnership
+	 *
+	 * @param { ArgumentTypes.AccountId } newOwner,
+	*/
+	"transferOwnership" (
+		newOwner: ArgumentTypes.AccountId,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::transferOwnership", [newOwner], __options);
 	}
 
 	/**
@@ -243,15 +255,15 @@ export default class Methods {
 	}
 
 	/**
-	 * transferOwnership
+	 * getRoleAdmin
 	 *
-	 * @param { ArgumentTypes.AccountId } newOwner,
+	 * @param { (number | string | BN) } role,
 	*/
-	"transferOwnership" (
-		newOwner: ArgumentTypes.AccountId,
+	"getRoleAdmin" (
+		role: (number | string | BN),
 		__options: GasLimit,
 	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::transferOwnership", [newOwner], __options);
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::getRoleAdmin", [role], __options);
 	}
 
 	/**
@@ -283,32 +295,6 @@ export default class Methods {
 	}
 
 	/**
-	 * grantRole
-	 *
-	 * @param { (number | string | BN) } role,
-	 * @param { ArgumentTypes.AccountId | null } account,
-	*/
-	"grantRole" (
-		role: (number | string | BN),
-		account: ArgumentTypes.AccountId | null,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::grantRole", [role, account], __options);
-	}
-
-	/**
-	 * getRoleAdmin
-	 *
-	 * @param { (number | string | BN) } role,
-	*/
-	"getRoleAdmin" (
-		role: (number | string | BN),
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::getRoleAdmin", [role], __options);
-	}
-
-	/**
 	 * renounceRole
 	 *
 	 * @param { (number | string | BN) } role,
@@ -320,6 +306,20 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::renounceRole", [role, account], __options);
+	}
+
+	/**
+	 * grantRole
+	 *
+	 * @param { (number | string | BN) } role,
+	 * @param { ArgumentTypes.AccountId | null } account,
+	*/
+	"grantRole" (
+		role: (number | string | BN),
+		account: ArgumentTypes.AccountId | null,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "accessControl::grantRole", [role, account], __options);
 	}
 
 	/**

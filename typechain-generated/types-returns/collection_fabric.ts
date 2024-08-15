@@ -7,8 +7,6 @@ export enum LangError {
 	couldNotReadInput = 'CouldNotReadInput'
 }
 
-export type Hash = string | number[]
-
 export interface ArchisinalError {
 	noOwner ? : null,
 	adminAccessError ? : null,
@@ -331,6 +329,8 @@ export class PSP22ErrorBuilder {
 		};
 	}
 }
+
+export type Hash = string | number[]
 
 export type CollectionInfo = {
 	name: string | null,

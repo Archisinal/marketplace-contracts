@@ -329,6 +329,17 @@ export class PSP22ErrorBuilder {
 	}
 }
 
+export type Listing = {
+	id: (string | number | BN),
+	creator: AccountId,
+	collection: AccountId,
+	tokenId: Id,
+	price: (string | number | BN),
+	currency: Currency,
+	status: ListingStatus,
+	royalty: (number | string | BN)
+}
+
 export interface Id {
 	u8 ? : (number | string | BN),
 	u16 ? : (number | string | BN),
@@ -389,21 +400,21 @@ export class CurrencyBuilder {
 	}
 }
 
-export type Listing = {
-	id: (string | number | BN),
-	creator: AccountId,
-	collection: AccountId,
-	tokenId: Id,
-	price: (string | number | BN),
-	currency: Currency,
-	status: ListingStatus,
-	royalty: (number | string | BN)
-}
-
 export enum ListingStatus {
 	onSale = 'OnSale',
 	sold = 'Sold',
 	cancelled = 'Cancelled'
+}
+
+export type AuctionInfo = {
+	creator: AccountId,
+	collection: AccountId,
+	tokenId: Id,
+	startPrice: (string | number | BN),
+	minBidStep: (string | number | BN),
+	currency: Currency,
+	startTime: (number | string | BN),
+	endTime: (number | string | BN)
 }
 
 export type Auction = {
@@ -428,17 +439,6 @@ export enum AuctionStatus {
 	waitingForClaim = 'WaitingForClaim',
 	ended = 'Ended',
 	cancelled = 'Cancelled'
-}
-
-export type AuctionInfo = {
-	creator: AccountId,
-	collection: AccountId,
-	tokenId: Id,
-	startPrice: (string | number | BN),
-	minBidStep: (string | number | BN),
-	currency: Currency,
-	startTime: (number | string | BN),
-	endTime: (number | string | BN)
 }
 
 export type Hash = string | number[]

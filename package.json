@@ -38,14 +38,14 @@
     "prepublish": "tsc"
   },
   "devDependencies": {
-    "@archisinal/typechain-compiler": "latest",
-    "@archisinal/typechain-types": "latest",
+    "@archisinal/typechain-compiler": "1.0.2",
+    "@archisinal/typechain-types": "1.0.2",
     "@babel/core": "^7.22.9",
     "@babel/register": "^7.22.5",
-    "@polkadot/api": "^10.9.1",
-    "@polkadot/api-contract": "^10.9.1",
-    "@polkadot/dev": "^0.78.5",
-    "@polkadot/dev-ts": "^0.78.5",
+    "@polkadot/api": "^12.3.1",
+    "@polkadot/api-contract": "^12.3.1",
+    "@polkadot/dev": "^0.79.3",
+    "@polkadot/dev-ts": "^0.79.3",
     "@types/chai": "^4.3.5",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "^10.0.1",
@@ -66,8 +66,8 @@
     "typescript": "^4.9.5"
   },
   "dependencies": {
-    "@polkadot/keyring": "^12.3.2",
-    "@polkadot/types": "^10.9.1",
+    "@polkadot/keyring": "^13.0.2",
+    "@polkadot/types": "^12.3.1",
     "bn.js": "^5.2.1",
     "dotenv": "^16.3.1"
   }
