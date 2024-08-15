@@ -14,13 +14,11 @@ export function decodeEvents(events: any[], contract: ContractPromise, types: an
 	return events.filter((record: any) => {
 		const { event } = record;
 
-		const [address, data] = record.event.data;
+		const [address] = record.event.data;
 
 		return event.method == 'ContractEmitted' && address.toString() === contract.address.toString();
 	}).map((record: any) => {
-		const [address, data] = record.event.data;
-
-		const {args, event} = contract.abi.decodeEvent(data);
+		const {args, event} = contract.abi.decodeEvent(record);
 
 		const _event: Record < string, any > = {};
 

@@ -1,6 +1,6 @@
 {
   "name": "@archisinal/contracts",
-  "version": "1.0.7",
+  "version": "1.0.10",
   "author": "Archisinal",
   "license": "MIT",
   "engines": {
@@ -38,7 +38,7 @@
     "prepublish": "tsc"
   },
   "devDependencies": {
-    "@archisinal/typechain-compiler": "1.0.2",
+    "@archisinal/typechain-compiler": "1.0.4",
     "@archisinal/typechain-types": "1.0.2",
     "@babel/core": "^7.22.9",
     "@babel/register": "^7.22.5",

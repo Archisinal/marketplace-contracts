@@ -21,28 +21,6 @@ export default class Methods {
 		this.__apiPromise = apiPromise;
 	}
 	/**
-	 * setUserData
-	 *
-	 * @param { ArgumentTypes.UserData } userInfo,
-	*/
-	"setUserData" (
-		userInfo: ArgumentTypes.UserData,
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "user::setUserData", [userInfo], __options);
-	}
-
-	/**
-	 * getUserData
-	 *
-	*/
-	"getUserData" (
-		__options: GasLimit,
-	){
-		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "user::getUserData", [], __options);
-	}
-
-	/**
 	 * renounceOwnership
 	 *
 	*/
@@ -72,6 +50,28 @@ export default class Methods {
 		__options: GasLimit,
 	){
 		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "ownable::transferOwnership", [newOwner], __options);
+	}
+
+	/**
+	 * getUserData
+	 *
+	*/
+	"getUserData" (
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "user::getUserData", [], __options);
+	}
+
+	/**
+	 * setUserData
+	 *
+	 * @param { ArgumentTypes.UserData } userInfo,
+	*/
+	"setUserData" (
+		userInfo: ArgumentTypes.UserData,
+		__options: GasLimit,
+	){
+		return buildSubmittableExtrinsic( this.__apiPromise, this.__nativeContract, "user::setUserData", [userInfo], __options);
 	}
 
 	/**

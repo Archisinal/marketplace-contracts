@@ -15,12 +15,12 @@
     "@jridgewell/gen-mapping" "^0.3.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@archisinal/typechain-compiler@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@archisinal/typechain-compiler/-/typechain-compiler-1.0.2.tgz#ef375bbe2311f0eea0ba1f288a653a88568a8c1b"
-  integrity sha512-p0us/shumlSUYrsuDah4g5iUwK8QzGMhRSv606lMoKgeIamHm9bl5lsWQ4krKCd55r+cYLN8JH6G17oajerPKw==
+"@archisinal/typechain-compiler@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@archisinal/typechain-compiler/-/typechain-compiler-1.0.4.tgz#2abd74189bc469a4c26088d82d31a9616a29358a"
+  integrity sha512-dZYweGWWSfWW4O7KwH7pj/+76blMdA+Ky5k2h2WiFNE15FfaNnIoI2BhhsJM6GKp8A0qPa8JvjAOjwsavV66bA==
   dependencies:
-    "@archisinal/typechain-polkadot" "1.0.2"
+    "@archisinal/typechain-polkadot" "1.0.4"
     "@types/consola" "^2.2.5"
     "@types/yargs" "^17.0.10"
     chalk "^4.1.0"
@@ -43,10 +43,10 @@
     camelcase "^6.3.0"
     typescript "^4.7.4"
 
-"@archisinal/typechain-polkadot@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@archisinal/typechain-polkadot/-/typechain-polkadot-1.0.2.tgz#81e569040530e820cf644dd83f305572bf456608"
-  integrity sha512-mYw8y3rmpjtasVQ0vbctVaiMPwRE6LiT9hQeBJdvrRbHotxJdBKvMoBs561Kx2OjVxeTr/KJnCCnLyBRuN3wOg==
+"@archisinal/typechain-polkadot@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@archisinal/typechain-polkadot/-/typechain-polkadot-1.0.4.tgz#88dd603987c572f34c2113b69edf6f2dd6963695"
+  integrity sha512-DmE4wK+I0HTN/wwbwZZTq3fIdCmX/u/I0J2FYK0guJIl8+x+EKvpe1njQQrUgg2ZWzkmaarTXCv8lrFeXFJ/3g==
   dependencies:
     "@archisinal/typechain-polkadot-parser" "1.0.2"
     "@polkadot/api" "^12.3.1"
